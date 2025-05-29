@@ -1,0 +1,797 @@
+/* FONT */
+@import url("https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap");
+
+/* COLORS */
+:root {
+  --primaryColor: #00c977;
+  --primaryColorLight: #00c97740;
+  --secondaryColor: #64af7d;
+  --secondaryColorLight: #64af7d40;
+  --tertiaryColor: #559675;
+  --tertiaryColorLight: #55967540;
+  --neutralClearBlack: #414141;
+  --primaryBlue: #252940;
+}
+
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+}
+
+body,
+html {
+  max-width: 1728px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+  font-style: normal;
+  font-family: "Dosis", sans-serif;
+  position: relative;
+  scroll-behavior: smooth !important;
+}
+
+img {
+  max-width: 100%;
+  object-fit: fill;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+hr {
+  width: 650px;
+  margin: 0 auto;
+  height: 1px;
+  background: #e7e7e7;
+  margin: 64px auto;
+}
+
+/* ESTYLES */
+.bg1-svg {
+  position: absolute;
+  top: 78px;
+  left: 0;
+  z-index: -1;
+}
+
+.bg2-svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.header {
+  height: 78px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 64px;
+  position: relative;
+  z-index: 1;
+  gap: 20px;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+.header nav ul {
+  display: flex;
+  gap: 32px;
+}
+
+.header nav ul li a {
+  color: var(--neutralClearBlack);
+  font-weight: 500;
+}
+
+.header nav ul li a:hover {
+  text-decoration: underline;
+}
+
+.section1-content {
+  background-image: url("../assets/meca-img-bg1.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 30px 64px 160px !important;
+}
+
+.section-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6em;
+  padding: 64px;
+}
+
+.section-content-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-content-info h1 {
+  font-weight: 700;
+  font-size: 40px;
+  color: #fff;
+}
+
+.section-content-text {
+  font-size: 20px;
+  font-weight: 400;
+  color: #fff;
+}
+
+.section-content-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.section-content-buttons button {
+  background-color: var(--primaryBlue);
+  color: #fff;
+  display: flex;
+  gap: 7px;
+  padding: 5px 8px;
+  justify-content: center;
+  align-items: center;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 4px;
+  height: 41px;
+  max-width: 183px;
+  cursor: pointer;
+}
+
+.section-content-buttons button > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.section-content-buttons button > div p:first-child {
+  color: #fff;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 9px; /* 112.5% */
+}
+
+.section1-info {
+  max-width: 375px;
+}
+
+.store-name {
+  color: #fff;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 100%; /* 18px */
+  letter-spacing: -0.47px;
+}
+
+.section2-content {
+  padding: 0px 64px 20px;
+}
+
+.section2-info {
+  max-width: 430px;
+}
+
+.section2-h2 {
+  color: var(--primaryColor);
+  font-size: 64px;
+  font-weight: 700;
+}
+
+.section2-h3 {
+  color: #4e4e4e;
+  font-size: 32px;
+  font-weight: 500;
+}
+
+.section2-p {
+  color: #888;
+  font-family: Dosis;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.section-benefits-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 64px;
+}
+
+.section-benefits-container h3 {
+  color: #525252;
+  font-size: 32px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.section-benefits-content {
+  display: flex;
+  gap: 32px;
+}
+
+.benefits-card {
+  display: flex;
+  padding: 32px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex: 1 0 0;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
+}
+
+.benefits-card h4 {
+  margin-top: 32px;
+  margin-bottom: 4px;
+}
+
+.section3-img {
+  max-width: 400px;
+}
+
+.section3-info {
+  max-width: 445px;
+}
+
+.section3-h2 {
+  color: #525252;
+  font-size: 32px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.section3-h3 {
+  color: #525252;
+  font-size: 64px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.section3-p {
+  color: #888;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.section4-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 520px;
+}
+
+.section-form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.section-form-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-form-info h2 {
+  color: #fff;
+  text-align: center;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.section-form-info p {
+  color: #fff;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.section-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.section-form div:first-child {
+  display: flex;
+  gap: 16px;
+}
+
+.section-form fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  position: relative;
+}
+
+.section-form fieldset label {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.section-form fieldset input,
+.section-form fieldset textarea {
+  display: flex;
+  height: 44px;
+  padding: 8px 12px;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  align-self: stretch;
+  border-radius: 8px;
+  border: 1px solid #bebebe;
+  background: #fff;
+}
+
+.section-form fieldset input::placeholder,
+.section-form fieldset textarea::placeholder {
+  color: #b1b1b1;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.section-form fieldset textarea {
+  height: auto;
+}
+
+.btn-section-form {
+  display: flex;
+  padding: 12px 64px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 4px;
+  background: var(--primaryBlue);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: background-color 0.3s;
+}
+
+.btn-section-form:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.btn-loader {
+  width: 18px;
+  height: 18px;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 64px;
+  color: #fff;
+  gap: 64px;
+  background-image: url("../assets/meca-img-bg2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  min-height: 816px;
+}
+
+.section-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 280px;
+}
+
+.footer-logo img {
+  width: 191px;
+}
+
+.footer-nav h5 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.footer-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-contact h5 {
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.footer-contact a {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: auto;
+  text-underline-offset: auto;
+  text-underline-position: from-font;
+}
+
+.footer-social-media {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.footer-social-media h5 {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.footer-social-media div {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.btn-menu {
+  display: none;
+  background: transparent;
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  display: block;
+  position: absolute;
+  bottom: -20px;
+}
+
+input.invalid,
+textarea.invalid {
+  border: 1px solid #dc3545 !important;
+  outline: none;
+}
+
+.footer-logo-mobile {
+  display: none;
+}
+
+.line {
+  display: none;
+}
+
+@media screen and (max-width: 1023px) {
+  .section-benefits-content {
+    flex-wrap: wrap;
+  }
+
+  .benefits-card {
+    min-width: 210px;
+  }
+
+  .section3-content {
+    flex-wrap: wrap;
+  }
+
+  .section4-content {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .section-form {
+    gap: 30px;
+  }
+
+  .section-form > div:first-child {
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+
+  hr {
+    width: 90%;
+  }
+
+  .header {
+    padding: 16px 20px;
+  }
+
+  .header nav ul {
+    gap: 12px;
+  }
+
+  .section1-content {
+    background-position: bottom;
+    background-image: url(../assets/meca-bg1-mobile.png);
+    min-height: 640px;
+    gap: 0;
+    align-items: flex-start;
+  }
+
+  .section1-content,
+  .section-footer {
+    flex-wrap: wrap;
+  }
+
+  .section2-content,
+  .section4-content {
+    flex-wrap: wrap;
+    flex-direction: column-reverse;
+  }
+
+  .footer-logo {
+    order: 4;
+    margin: 20px auto 0;
+  }
+
+  .footer-logo img {
+    width: 100%;
+  }
+
+  .footer-logo p {
+    display: none;
+  }
+
+  .section-content,
+  .section-benefits-container {
+    padding: 20px 20px !important;
+  }
+
+  .section-content-info h1 {
+    font-size: 36px;
+  }
+
+  .section-content-text {
+    font-size: 16px;
+  }
+
+  .section2-h2 {
+    font-size: 48px;
+  }
+
+  .section2-h3 {
+    font-size: 24px;
+  }
+
+  .section2-p {
+    font-size: 16px;
+  }
+
+  .benefits-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 32px;
+  }
+
+  .benefits-card h4 {
+    margin-top: 0px;
+    margin-bottom: 4px;
+  }
+
+  .section3-h2 {
+    color: #4e4e4e;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: none;
+  }
+
+  .section3-h3 {
+    color: var(--primaryColor);
+    font-size: 48px;
+    font-weight: 700;
+  }
+
+  .section3-p {
+    color: #6b6b6b;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .section-content-buttons button {
+    max-width: 100%;
+  }
+
+  .footer {
+    padding: 20px 20px 100px;
+    min-height: 1410px;
+    background-image: url(../assets/meca-bg2-mobile.png);
+  }
+
+  .section-form-info h2 {
+    color: #fff;
+    text-align: center;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    text-transform: none;
+  }
+
+  .section-form-info p {
+    color: #fff;
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: none;
+  }
+
+  .section1-content-img {
+    width: 80%;
+  }
+
+  .btn-menu {
+    display: block;
+  }
+
+  .menu {
+    position: absolute;
+    top: 78px;
+    left: 0;
+    width: 100%;
+    min-height: 100vh;
+    background-color: var(--primaryColor);
+    padding: 20px;
+    transform: translateX(-500px);
+    transition: all 0.3s;
+    z-index: 100;
+  }
+
+  .menu ul {
+    flex-direction: column;
+    gap: 30px !important;
+  }
+
+  .menu ul a {
+    font-size: 30px;
+    color: #fff !important;
+  }
+
+  .section4-content {
+    padding: 30px 20px 60px !important;
+  }
+
+  .footer-contact,
+  .footer-nav ul,
+  .footer-social-media {
+    gap: 16px;
+  }
+
+  .section-footer {
+    gap: 40px;
+  }
+
+  .footer-logo-mobile {
+    background-color: #fff;
+    width: calc(100% + 40px);
+    transform: translateX(-20px);
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .line {
+    display: flex;
+    width: 60%;
+    margin: -25px auto 0;
+  }
+}
+
+#toast-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  padding: 16px 24px;
+  border-radius: 8px;
+  color: white;
+  font-size: 14px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease forwards, fadeOut 0.5s ease 3.5s forwards;
+  opacity: 1;
+  transform: translateX(100%);
+}
+
+.toast-success {
+  background-color: #28a745;
+}
+
+.toast-error {
+  background-color: #dc3545;
+}
+
+@keyframes slideIn {
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
