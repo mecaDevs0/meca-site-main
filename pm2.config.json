@@ -1,0 +1,17 @@
+{
+  "apps": [
+    {
+      "name": "meca-nextjs",
+      "script": "npm",
+      "args": "start",
+      "cwd": "./",
+      "instances": "max",
+      "exec_mode": "cluster",
+      "env": {
+        "NODE_ENV": "production",
+        "PORT": 3000
+      },
+      "log_date_format": "YYYY-MM-DD HH:mm Z"
+    }
+  ]
+}

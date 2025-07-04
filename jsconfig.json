@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "target": "es6",
+    "module": "esnext",
+    "resolveJsonModule": true
+  },
+  "exclude": ["node_modules"]
+}
