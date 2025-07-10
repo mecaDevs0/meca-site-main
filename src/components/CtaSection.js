@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Download, Mail, MessageSquare, Phone } from 'lucide-react';
+import { ArrowRight, CheckCircle, Clock, Mail, Phone, Shield, Zap } from 'lucide-react';
+import Image from 'next/image';
 import { useState } from 'react';
 
 export default function CtaSection() {
@@ -16,10 +17,30 @@ export default function CtaSection() {
   };
 
   const benefits = [
-    "Acesso a 1000+ oficinas verificadas",
-    "Orçamentos gratuitos e transparentes",
-    "Suporte 24/7 para emergências",
-    "Histórico completo do seu veículo"
+    "Conecte-se com oficinas próximas a você",
+    "Agende serviços com facilidade e rapidez",
+    "Acompanhe o status do seu serviço em tempo real",
+    "Tenha todo histórico do seu veículo em um só lugar"
+  ];
+  
+  // New feature highlights to replace stats
+  const features = [
+    {
+      icon: <Clock className="w-6 h-6 text-meca-verde" />,
+      label: "Agendamento Rápido",
+    },
+    {
+      icon: <Shield className="w-6 h-6 text-meca-verde" />,
+      label: "Oficinas Confiáveis",
+    },
+    {
+      icon: <Zap className="w-6 h-6 text-meca-verde" />,
+      label: "Serviço Eficiente",
+    },
+    {
+      icon: <CheckCircle className="w-6 h-6 text-meca-verde" />,
+      label: "Preços Transparentes",
+    }
   ];
 
   return (
@@ -49,17 +70,17 @@ export default function CtaSection() {
                 viewport={{ once: true }}
                 className="inline-flex items-center px-4 py-2 bg-meca-verde/20 border border-meca-verde/30 rounded-full text-meca-verde text-sm font-medium"
               >
-                🚀 Transforme sua experiência automotiva
+                🚀 Revolucionando a manutenção automotiva
               </motion.div>
               
               <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Pronto para começar sua jornada com a{' '}
-                <span className="text-meca-verde">MECA</span>?
+                Simplifique o cuidado com seu{' '}
+                <span className="text-meca-verde">veículo</span>
               </h2>
               
               <p className="text-xl text-gray-300 leading-relaxed">
-                Junte-se a mais de 50.000 usuários que já descobriram uma forma 
-                mais inteligente de cuidar do seu veículo.
+                A maneira mais moderna e eficiente de gerenciar 
+                a manutenção do seu carro e conectar-se com oficinas de confiança.
               </p>
             </div>
 
@@ -88,24 +109,43 @@ export default function CtaSection() {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-meca-verde text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-meca-verde/90 transition-all duration-300 flex items-center justify-center space-x-2"
-              >
-                <Download className="w-5 h-5" />
-                <span>Baixar App Gratuito</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <motion.a 
+                  href="https://apps.apple.com/us/app/meca/id6743087361"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+                >
+                  <Image
+                    src={require('@/assets/buttonAppleStore.svg')}
+                    alt="Baixar na App Store"
+                    width={160}
+                    height={53}
+                    className="w-full h-auto object-contain"
+                  />
+                </motion.a>
+                
+                <motion.a 
+                  href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+                >
+                  <Image
+                    src={require('@/assets/buttonGooglePlay.png')}
+                    alt="Baixar no Google Play"
+                    width={160}
+                    height={53}
+                    className="h-auto"
+                  />
+                </motion.a>
+              </div>
               
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center justify-center space-x-2"
-              >
-                <MessageSquare className="w-5 h-5" />
-                <span>Falar com Especialista</span>
-              </motion.button>
+             
             </motion.div>
           </motion.div>
 
@@ -119,15 +159,15 @@ export default function CtaSection() {
           >
             <div className="text-center mb-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Receba novidades exclusivas
+                Fique por dentro das novidades
               </h3>
               <p className="text-gray-600">
-                Seja o primeiro a saber sobre novas funcionalidades e promoções especiais
+                Saiba em primeira mão quando o app estiver disponível para download
               </p>
             </div>
 
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
                     Seu melhor e-mail
@@ -139,27 +179,26 @@ export default function CtaSection() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="seuemail@exemplo.com"
-                      required
                       className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-meca-verde focus:border-transparent transition-all duration-200"
                     />
                   </div>
                 </div>
 
-                <motion.button
-                  type="submit"
+                <motion.a
+                  href="mailto:contato@meca.app?subject=Quero%20ficar%20por%20dentro%20das%20novidades"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="w-full bg-gradient-to-r from-meca-verde to-meca-marinho text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
                 >
-                  <span>Quero receber novidades</span>
+                  <span>Quero ficar por dentro</span>
                   <ArrowRight className="w-5 h-5" />
-                </motion.button>
+                </motion.a>
 
                 <p className="text-xs text-gray-500 text-center">
                   Ao se inscrever, você concorda com nossa política de privacidade. 
                   Você pode cancelar a qualquer momento.
                 </p>
-              </form>
+              </div>
             ) : (
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
@@ -173,7 +212,7 @@ export default function CtaSection() {
                   Obrigado! 🎉
                 </h3>
                 <p className="text-gray-600">
-                  Você foi inscrito com sucesso. Em breve você receberá novidades exclusivas da MECA.
+                  Você foi inscrito com sucesso. Avisaremos quando o app MECA estiver disponível.
                 </p>
               </motion.div>
             )}
@@ -184,18 +223,18 @@ export default function CtaSection() {
               <div className="flex justify-center space-x-6 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
-                  <span>(11) 9999-9999</span>
+                  <span>(11) 97477-2390</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4" />
-                  <span>contato@meca.app</span>
+                  <span>contato@mecabr.com </span>
                 </div>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Bottom Stats */}
+        {/* Feature Highlights (replacing numerical stats) */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -203,22 +242,20 @@ export default function CtaSection() {
           viewport={{ once: true }}
           className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white"
         >
-          <div>
-            <div className="text-3xl font-bold text-meca-verde mb-2">50k+</div>
-            <div className="text-gray-400">Usuários Ativos</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-meca-verde mb-2">1000+</div>
-            <div className="text-gray-400">Oficinas Verificadas</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-meca-verde mb-2">150k+</div>
-            <div className="text-gray-400">Serviços Realizados</div>
-          </div>
-          <div>
-            <div className="text-3xl font-bold text-meca-verde mb-2">4.8★</div>
-            <div className="text-gray-400">Avaliação Média</div>
-          </div>
+          {features.map((feature, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
+              viewport={{ once: true }}
+            >
+              <div className="flex justify-center mb-3">
+                {feature.icon}
+              </div>
+              <div className="text-gray-300 font-medium">{feature.label}</div>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

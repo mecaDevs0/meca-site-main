@@ -197,8 +197,8 @@ A landing page foi otimizada para maximizar conversões através de:
 
 ## 📞 Contato e Suporte
 
-- **Email**: contato@meca.app
-- **Telefone**: (11) 9999-9999
+- **Email**: contato@mecabr.com 
+- **Telefone**: (11) 97477-2390
 - **Localização**: São Paulo, Brasil
 
 ## 🔄 Próximas Atualizações

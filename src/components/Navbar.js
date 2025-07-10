@@ -1,28 +1,54 @@
 'use client';
 
+import mecaLogo from '@/assets/meca-logo.png';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Download, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
+      
+      // Track active section for nav highlighting
+      const sections = document.querySelectorAll('section[id]');
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionHeight = section.offsetHeight;
+        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+          setActiveSection(section.id);
+        }
+      });
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Smooth scroll to section
+  const scrollToSection = (e, sectionId) => {
+    e.preventDefault();
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
+      setIsMenuOpen(false);
+    }
+  };
+
   const navLinks = [
-    { name: 'Para Motoristas', href: '#motoristas' },
-    { name: 'Para Oficinas', href: '#oficinas' },
-    { name: 'Como Funciona', href: '#como-funciona' },
-    { name: 'Sobre', href: '#sobre' }
+    { name: 'Para Motoristas', href: '#motoristas', sectionId: 'motoristas' },
+    { name: 'Para Oficinas', href: '#oficinas', sectionId: 'oficinas' },
+    { name: 'Como Funciona', href: '#como-funciona', sectionId: 'como-funciona' },
+    { name: 'Sobre', href: '#sobre', sectionId: 'sobre' }
   ];
 
   return (
@@ -34,7 +60,7 @@ export default function Navbar() {
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled 
             ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-            : 'bg-meca-verde/70'
+            : 'bg-meca-verde/70 backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -46,14 +72,15 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-2"
               >
-                <div className="w-10 h-10 bg-meca-verde rounded-xl flex items-center justify-center group-hover:bg-meca-verde/90 transition-colors">
-                  <span className="font-bold text-xl text-white">M</span>
+                <div className="w-20 h-20 relative">
+                  <Image 
+                    src={mecaLogo} 
+                    alt="MECA Logo" 
+                    fill 
+                    className="object-contain" 
+                  />
                 </div>
-                <span className={`font-bold text-xl transition-colors ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
-                }`}>
-                  MECA
-                </span>
+             
               </motion.div>
             </Link>
 
@@ -68,33 +95,24 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className={`font-medium transition-colors hover:text-meca-verde ${
-                      isScrolled ? 'text-gray-700' : 'text-white/90'
+                    onClick={(e) => scrollToSection(e, link.sectionId)}
+                    className={`font-medium transition-colors hover:text-meca-verde relative px-2 py-1 ${
+                      activeSection === link.sectionId 
+                        ? 'text-meca-verde' 
+                        : isScrolled ? 'text-gray-700' : 'text-white/90'
                     }`}
                   >
                     {link.name}
+                    {activeSection === link.sectionId && (
+                      <motion.span 
+                        layoutId="activeSection"
+                        className="absolute bottom-0 left-0 h-0.5 w-full bg-meca-verde" 
+                      />
+                    )}
                   </Link>
                 </motion.div>
               ))}
             </div>
-
-            {/* Desktop CTA Button */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="hidden lg:flex items-center space-x-4"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group bg-meca-verde text-white px-6 py-3 rounded-xl font-semibold hover:bg-meca-verde/90 transition-all duration-300 flex items-center space-x-2"
-              >
-                <Download className="w-4 h-4" />
-                <span>Baixar App</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </motion.button>
-            </motion.div>
 
             {/* Mobile Menu Button */}
             <motion.button
@@ -157,30 +175,18 @@ export default function Navbar() {
                       >
                         <Link
                           href={link.href}
-                          onClick={() => setIsMenuOpen(false)}
-                          className="block py-3 text-lg font-medium text-gray-700 hover:text-meca-verde transition-colors"
+                          onClick={(e) => scrollToSection(e, link.sectionId)}
+                          className={`block py-3 text-lg font-medium transition-colors ${
+                            activeSection === link.sectionId 
+                              ? 'text-meca-verde' 
+                              : 'text-gray-700 hover:text-meca-verde'
+                          }`}
                         >
                           {link.name}
                         </Link>
                       </motion.div>
                     ))}
                   </div>
-
-                  {/* Mobile CTA Button */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.4 }}
-                    className="mt-8 pt-8 border-t border-gray-200"
-                  >
-                    <button
-                      onClick={() => setIsMenuOpen(false)}
-                      className="w-full bg-meca-verde text-white px-6 py-4 rounded-xl font-semibold hover:bg-meca-verde/90 transition-colors flex items-center justify-center space-x-2"
-                    >
-                      <Download className="w-5 h-5" />
-                      <span>Baixar App Gratuito</span>
-                    </button>
-                  </motion.div>
 
                   {/* Contact Info */}
                   <motion.div
@@ -190,7 +196,7 @@ export default function Navbar() {
                     className="mt-8 pt-8 border-t border-gray-200 text-center"
                   >
                     <p className="text-sm text-gray-600 mb-2">Dúvidas? Fale conosco:</p>
-                    <p className="text-sm font-medium text-meca-verde">contato@meca.app</p>
+                    <p className="text-sm font-medium text-meca-verde">contato@mecabr.com </p>
                   </motion.div>
                 </div>
               </motion.div>

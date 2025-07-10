@@ -140,30 +140,7 @@ export default function BrandValuesSection() {
           })}
         </motion.div>
 
-        {/* Call to Action */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="text-center mt-20"
-        >
-          <div className="bg-gradient-to-r from-meca-verde to-meca-marinho rounded-3xl p-12 text-white">
-            <h3 className="text-3xl font-bold mb-4">
-              Pronto para fazer parte da nossa história?
-            </h3>
-            <p className="text-xl mb-8 text-white/90">
-              Junte-se a milhares de usuários que já escolheram a MECA como sua plataforma automotiva.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white text-meca-verde px-8 py-4 rounded-xl font-semibold text-lg hover:bg-gray-50 transition-colors"
-            >
-              Começar Agora
-            </motion.button>
-          </div>
-        </motion.div>
+      
       </div>
     </section>
   );

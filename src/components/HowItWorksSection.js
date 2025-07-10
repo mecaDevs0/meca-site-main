@@ -1,7 +1,9 @@
 'use client';
 
+import mecaImg3 from '@/assets/meca-img3.png';
 import { motion } from 'framer-motion';
 import { ArrowRight, Calendar, CheckCircle, Search, Wrench } from 'lucide-react';
+import Image from 'next/image';
 
 export default function HowItWorksSection() {
   const steps = [
@@ -140,13 +142,31 @@ export default function HowItWorksSection() {
           viewport={{ once: true }}
           className="mt-24"
         >
-          <div className="bg-gradient-to-r from-meca-marinho to-gray-900 rounded-3xl p-12 text-white">
-            <div className="text-center mb-12">
-              <h3 className="text-3xl font-bold mb-4">
-                Recursos que fazem a diferença
+          <div className="bg-white border-2 border-meca-verde/20 rounded-[2.5rem] p-12 text-gray-800 relative overflow-hidden shadow-xl">
+            {/* Decorative elements */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-meca-verde/20 to-blue-300/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-meca-marinho/20 to-purple-300/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
+            
+            {/* Subtle pattern overlay */}
+            <div className="absolute inset-0 opacity-5 mix-blend-overlay">
+              <Image 
+                src={mecaImg3} 
+                alt="MECA recursos" 
+                fill 
+                quality={100}
+                className="object-cover"
+              />
+            </div>
+            
+            <div className="relative z-10 text-center mb-12">
+              <div className="inline-flex items-center px-4 py-2 bg-meca-verde/10 text-meca-verde rounded-full text-sm font-medium mb-4">
+                ✨ Recursos Exclusivos
+              </div>
+              <h3 className="text-3xl font-bold mb-4 text-gray-900">
+                Ferramentas que transformam sua experiência
               </h3>
-              <p className="text-white/80 text-lg">
-                Todas as ferramentas que você precisa em um só lugar
+              <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+                Tudo que você precisa para gerenciar a manutenção do seu veículo com facilidade
               </p>
             </div>
 
@@ -158,26 +178,34 @@ export default function HowItWorksSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="flex items-center space-x-3 p-4 bg-white/10 rounded-xl backdrop-blur-sm"
+                  className="flex items-center space-x-3 p-5 bg-gradient-to-br from-gray-50 to-white rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100"
                 >
-                  <CheckCircle className="w-5 h-5 text-meca-verde flex-shrink-0" />
-                  <span className="text-white/90">{feature}</span>
+                  <div className="p-2 bg-meca-verde/10 rounded-full">
+                    <CheckCircle className="w-5 h-5 text-meca-verde flex-shrink-0" />
+                  </div>
+                  <span className="text-gray-700 font-medium">{feature}</span>
                 </motion.div>
               ))}
             </div>
 
-            <div className="text-center mt-12">
+            <div className="text-center mt-16">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-meca-verde text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-meca-verde/90 transition-colors flex items-center space-x-2 mx-auto"
+                className="bg-gradient-to-r from-meca-verde to-meca-marinho text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
+                style={{ display: 'inline-flex' }}
               >
                 <span>Experimente Agora</span>
                 <ArrowRight className="w-5 h-5" />
               </motion.button>
+              <p className="text-gray-500 text-sm mt-4">
+                Comece a transformar sua experiência automotiva hoje mesmo
+              </p>
             </div>
           </div>
         </motion.div>
+
+
       </div>
     </section>
   );

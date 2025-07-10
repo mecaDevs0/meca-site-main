@@ -26,10 +26,18 @@ export default function Home() {
       <Navbar />
       <main className="w-full">
         <HeroSection />
-        <ServicesSection />
-        <HowItWorksSection />
-        <AppSection />
-        <BrandValuesSection />
+        <section id="motoristas">
+          <ServicesSection />
+        </section>
+        <section id="como-funciona">
+          <HowItWorksSection />
+        </section>
+        <section id="oficinas">
+          <AppSection />
+        </section>
+        <section id="sobre">
+          <BrandValuesSection />
+        </section>
         <TestimonialsSection />
         <FAQSection />
         <CtaSection />

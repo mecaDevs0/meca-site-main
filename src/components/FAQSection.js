@@ -84,7 +84,7 @@ export default function FAQSection() {
             >
               <button
                 onClick={() => toggleFAQ(index)}
-                className="w-full px-8 py-6 text-left focus:outline-none focus:ring-2 focus:ring-meca-verde focus:ring-offset-2 bg-white hover:bg-gray-50 transition-colors"
+                className="w-full px-8 py-6 text-left bg-white hover:bg-gray-50 transition-colors"
               >
                 <div className="flex justify-between items-center">
                   <h3 className="text-lg font-semibold text-gray-900 pr-8">
@@ -137,20 +137,24 @@ export default function FAQSection() {
               Nossa equipe de suporte está sempre pronta para ajudar você.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
+              <motion.a
+                href="https://wa.me/5511974772390?text=Ola,%20vim%20atravez%20do%20site%20da%20meca%20e%20estou%20com%20duvidas"
+                target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-meca-verde text-white px-6 py-3 rounded-xl font-semibold hover:bg-meca-verde/90 transition-colors"
+                className="bg-meca-verde text-white px-6 py-3 rounded-xl font-semibold hover:bg-meca-verde/90 transition-colors inline-flex items-center justify-center"
               >
                 Falar com Suporte
-              </motion.button>
-              <motion.button
+              </motion.a>
+              <motion.a
+                href="mailto:contato@meca.app?subject=Central%20de%20Ajuda%20-%20Dúvida"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors"
+                className="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors inline-flex items-center justify-center"
               >
                 Central de Ajuda
-              </motion.button>
+              </motion.a>
             </div>
           </div>
         </motion.div>

@@ -145,14 +145,7 @@ export default function ServicesSection() {
               ))}
             </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="pt-6"
-            >
-              <button className="w-full lg:w-auto bg-meca-verde text-white px-8 py-4 rounded-xl font-semibold hover:bg-meca-verde/90 transition-colors">
-                Baixar App - Motorista
-              </button>
-            </motion.div>
+
           </motion.div>
 
           {/* Para Oficinas */}
@@ -195,18 +188,11 @@ export default function ServicesSection() {
               ))}
             </div>
 
-            <motion.div
-              variants={itemVariants}
-              className="pt-6"
-            >
-              <button className="w-full lg:w-auto bg-meca-marinho text-white px-8 py-4 rounded-xl font-semibold hover:bg-meca-marinho/90 transition-colors">
-                Cadastrar Oficina
-              </button>
-            </motion.div>
+
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Features Highlight Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -216,20 +202,32 @@ export default function ServicesSection() {
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
             <div>
-              <div className="text-3xl lg:text-4xl font-bold mb-2">50k+</div>
-              <div className="text-white/80">Usuários Ativos</div>
+              <div className="flex justify-center mb-4">
+                <Clock className="w-8 h-8" />
+              </div>
+              <div className="text-xl lg:text-2xl font-bold mb-2">Rapidez</div>
+              <div className="text-white/80">Serviços ágeis</div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold mb-2">1000+</div>
-              <div className="text-white/80">Oficinas Parceiras</div>
+              <div className="flex justify-center mb-4">
+                <Shield className="w-8 h-8" />
+              </div>
+              <div className="text-xl lg:text-2xl font-bold mb-2">Segurança</div>
+              <div className="text-white/80">Oficinas verificadas</div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold mb-2">150k+</div>
-              <div className="text-white/80">Serviços Realizados</div>
+              <div className="flex justify-center mb-4">
+                <CreditCard className="w-8 h-8" />
+              </div>
+              <div className="text-xl lg:text-2xl font-bold mb-2">Transparência</div>
+              <div className="text-white/80">Preços sem surpresas</div>
             </div>
             <div>
-              <div className="text-3xl lg:text-4xl font-bold mb-2">4.8★</div>
-              <div className="text-white/80">Avaliação Média</div>
+              <div className="flex justify-center mb-4">
+                <Smartphone className="w-8 h-8" />
+              </div>
+              <div className="text-xl lg:text-2xl font-bold mb-2">Praticidade</div>
+              <div className="text-white/80">Tudo pelo celular</div>
             </div>
           </div>
         </motion.div>

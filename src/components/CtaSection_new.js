@@ -184,11 +184,11 @@ export default function CtaSection() {
               <div className="flex justify-center space-x-6 text-sm text-gray-600">
                 <div className="flex items-center space-x-2">
                   <Phone className="w-4 h-4" />
-                  <span>(11) 9999-9999</span>
+                  <span>(11) 97477-2390</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Mail className="w-4 h-4" />
-                  <span>contato@meca.app</span>
+                  <span>contato@mecabr.com </span>
                 </div>
               </div>
             </div>

@@ -1,7 +1,9 @@
 'use client';
 
+import mecaImg1 from '@/assets/meca-img1.png';
 import { motion } from 'framer-motion';
-import { ArrowDown, Play, Shield, Star, Users } from 'lucide-react';
+import { ArrowDown, Shield, Star, Users } from 'lucide-react';
+import Image from 'next/image';
 
 export default function HeroSection() {
   const containerVariants = {
@@ -46,6 +48,18 @@ export default function HeroSection() {
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-meca-marinho via-meca-marinho to-gray-900 overflow-hidden">
+      {/* Background Image Overlay */}
+      <div className="absolute inset-0 opacity-20">
+        <Image 
+          src={mecaImg1} 
+          alt="MECA background" 
+          fill 
+          quality={100}
+          className="object-cover"
+          priority
+        />
+      </div>
+
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-20 left-20 w-72 h-72 bg-meca-verde rounded-full blur-3xl"></div>
@@ -67,11 +81,12 @@ export default function HeroSection() {
           animate="visible"
           className="text-center space-y-12"
         >
-          {/* Badge */}
           <motion.div variants={itemVariants} className="flex justify-center">
             <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white/90">
               <span className="w-2 h-2 bg-meca-verde rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium">Disponível agora</span>
+              <span className="text-sm font-medium">
+                Baixe o App MECA
+              </span>
             </div>
           </motion.div>
 
@@ -107,23 +122,50 @@ export default function HeroSection() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group bg-meca-verde text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2"
-            >
-              <span>Baixar App Gratuito</span>
-              <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform" />
-            </motion.button>
+            <div className="flex flex-col sm:flex-row gap-4 j">
+              <motion.a 
+                href="https://apps.apple.com/us/app/meca/id6743087361"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+              >
+                <Image
+                  src={require('@/assets/buttonAppleStore.svg')}
+                  alt="Baixar na App Store"
+                  width={160}
+                  height={53}
+                  className="w-full h-auto object-contain"
+                />
+              </motion.a>
+              
+              <motion.a 
+                href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+              >
+                <Image
+                  src={require('@/assets/buttonGooglePlay.png')}
+                  alt="Baixar no Google Play"
+                  width={160}
+                  height={53}
+                  className="h-auto"
+                />
+              </motion.a>
+            </div>
             
-            <motion.button
+            {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center space-x-2"
             >
               <Play className="w-5 h-5" />
               <span>Ver Demo</span>
-            </motion.button>
+            </motion.button> */}
           </motion.div>
 
           {/* Stats */}

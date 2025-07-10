@@ -8,3 +8,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+/* Smooth scrolling behavior for the entire site */
+html {
+  scroll-behavior: smooth;
+}

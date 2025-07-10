@@ -1,7 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Download, ExternalLink, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { ExternalLink, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Footer() {
@@ -20,10 +21,10 @@ export default function Footer() {
     {
       title: "Para Oficinas",
       links: [
-        { name: "Cadastrar Oficina", href: "#", external: true },
+        { name: "Cadastrar Oficina", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true },
         { name: "Painel de Gestão", href: "#" },
         { name: "Planos e Preços", href: "#" },
-        { name: "Central de Ajuda", href: "#" }
+        { name: "Central de Ajuda", href: "mailto:contato@meca.app?subject=Central%20de%20Ajuda" }
       ]
     },
     {
@@ -75,11 +76,11 @@ export default function Footer() {
                 <div className="space-y-3 mb-6">
                   <div className="flex items-center space-x-3 text-gray-300">
                     <Mail className="w-5 h-5 text-meca-verde" />
-                    <span>contato@meca.app</span>
+                    <span>contato@mecabr.com </span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <Phone className="w-5 h-5 text-meca-verde" />
-                    <span>(11) 9999-9999</span>
+                    <span>(11) 97477-2390</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <MapPin className="w-5 h-5 text-meca-verde" />
@@ -153,34 +154,38 @@ export default function Footer() {
                   Baixe o App
                 </h3>
                 <div className="space-y-4">
-                  <motion.a
-                    href="#"
+                  <motion.a 
+                    href="https://apps.apple.com/us/app/meca/id6743087361"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-3 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-all duration-300 group"
+                    className="transition-all duration-300 w-[140px] h-[46px] flex items-center"
                   >
-                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                      <Download className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400">Baixar no</p>
-                      <p className="font-semibold text-white">App Store</p>
-                    </div>
+                    <Image
+                      src={require('@/assets/buttonAppleStore.svg')}
+                      alt="Baixar na App Store"
+                      width={140}
+                      height={46}
+                      className="w-full h-auto object-contain"
+                    />
                   </motion.a>
                   
-                  <motion.a
-                    href="#"
+                  <motion.a 
+                    href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="flex items-center space-x-3 bg-white/10 hover:bg-white/20 p-4 rounded-xl transition-all duration-300 group"
+                    className="transition-all duration-300 w-[140px] h-[46px] flex items-center"
                   >
-                    <div className="w-8 h-8 bg-white/20 rounded-lg flex items-center justify-center">
-                      <Download className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-gray-400">Baixar no</p>
-                      <p className="font-semibold text-white">Google Play</p>
-                    </div>
+                    <Image
+                      src={require('@/assets/buttonGooglePlay.png')}
+                      alt="Baixar no Google Play"
+                      width={150}
+                      height={50}
+                      className="h-auto"
+                    />
                   </motion.a>
                 </div>
 
