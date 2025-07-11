@@ -67,7 +67,7 @@ export default function FAQSection() {
           </h2>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Reunimos as principais perguntas dos nossos usuários para 
-            ajudar você a entender melhor como a MECA funciona.
+            ajudar você a entender melhor como o MECA funciona.
           </p>
         </motion.div>
 

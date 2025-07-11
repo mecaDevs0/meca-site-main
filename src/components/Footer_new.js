@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { ExternalLink, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -12,25 +12,25 @@ export default function Footer() {
     {
       title: "Para Motoristas",
       links: [
-        { name: "Baixar App", href: "#", external: true },
-        { name: "Como Funciona", href: "#" },
-        { name: "Encontrar Oficinas", href: "#" },
-        { name: "Suporte", href: "#" }
+        { name: "Baixar App", href: "https://apps.apple.com/us/app/meca/id6743087361", external: true },
+        { name: "Como Funciona", href: "#como-funciona" },
+        { name: "Encontrar Oficinas", href: "#motoristas" },
+        { name: "Suporte", href: "mailto:contato@mecabr.com?subject=Suporte" }
       ]
     },
     {
       title: "Para Oficinas",
       links: [
         { name: "Cadastrar Oficina", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true },
-        { name: "Painel de Gestão", href: "#" },
-        { name: "Planos e Preços", href: "#" },
-        { name: "Central de Ajuda", href: "mailto:contato@meca.app?subject=Central%20de%20Ajuda" }
+        { name: "Painel de Gestão", href: "#oficinas" },
+        { name: "Planos e Preços", href: "#sobre" },
+        { name: "Central de Ajuda", href: "mailto:contato@mecabr.com?subject=Central%20de%20Ajuda" }
       ]
     },
     {
       title: "Empresa",
       links: [
-        { name: "Sobre Nós", href: "#" },
+        { name: "Sobre Nós", href: "#sobre" },
         { name: "Blog", href: "#" },
         { name: "Carreiras", href: "#" },
         { name: "Imprensa", href: "#" }
@@ -39,8 +39,7 @@ export default function Footer() {
   ];
 
   const socialLinks = [
-    { name: "Instagram", icon: Instagram, href: "https://instagram.com/mecaapp" },
-    { name: "LinkedIn", icon: Linkedin, href: "https://linkedin.com/company/mecaapp" }
+    { name: "Instagram", icon: Instagram, href: "https://www.instagram.com/mecabr_?igsh=MWZiMXo0cWpkbmwyYg==" }
   ];
 
   return (
@@ -163,7 +162,7 @@ export default function Footer() {
                     className="transition-all duration-300 w-[140px] h-[46px] flex items-center"
                   >
                     <Image
-                      src={require('@/assets/buttonAppleStore.svg')}
+                      src={require('@/assets/buttonAppleStore.png')}
                       alt="Baixar na App Store"
                       width={140}
                       height={46}
@@ -189,13 +188,14 @@ export default function Footer() {
                   </motion.a>
                 </div>
 
-                {/* Stats */}
+                {/* Stats - Temporariamente removidos
                 <div className="mt-8 p-4 bg-white/5 rounded-xl">
                   <div className="text-center">
                     <div className="text-2xl font-bold text-meca-verde mb-1">50k+</div>
                     <div className="text-sm text-gray-400">Downloads</div>
                   </div>
                 </div>
+                */}
               </motion.div>
             </div>
           </div>
@@ -220,7 +220,7 @@ export default function Footer() {
               <Link href="#" className="hover:text-meca-verde transition-colors">
                 Cookies
               </Link>
-              <Link href="#" className="hover:text-meca-verde transition-colors">
+              <Link href="mailto:contato@mecabr.com" className="hover:text-meca-verde transition-colors">
                 Segurança
               </Link>
             </div>

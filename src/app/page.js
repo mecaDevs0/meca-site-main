@@ -11,7 +11,7 @@ import TestimonialsSection from '@/components/TestimonialsSection';
 
 export const metadata = {
   title: 'MECA - O conserto do seu carro na palma da mão',
-  description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA. Mais de 50.000 usuários já escolheram a MECA.',
+  description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA. Mais de 50.000 usuários já escolheram o MECA.',
   keywords: 'oficina, mecânico, carro, manutenção, app, aplicativo, orçamento, agendamento',
   openGraph: {
     title: 'MECA - Quem vai de MECA, vai além!',

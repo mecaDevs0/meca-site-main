@@ -173,7 +173,7 @@ export default function CtaSection() {
                   Obrigado! 🎉
                 </h3>
                 <p className="text-gray-600">
-                  Você foi inscrito com sucesso. Em breve você receberá novidades exclusivas da MECA.
+                  Você foi inscrito com sucesso. Em breve você receberá novidades exclusivas do MECA.
                 </p>
               </motion.div>
             )}
@@ -196,6 +196,7 @@ export default function CtaSection() {
         </div>
 
         {/* Bottom Stats */}
+        {/* Métricas temporariamente removidas até termos números reais
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -220,6 +221,7 @@ export default function CtaSection() {
             <div className="text-gray-400">Avaliação Média</div>
           </div>
         </motion.div>
+        */}
       </div>
     </section>
   );

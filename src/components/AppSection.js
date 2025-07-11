@@ -24,10 +24,11 @@ export default function AppSection() {
     }
   ];
 
+  // Comentado temporariamente até termos métricas reais
   const stats = [
-    { number: "50k+", label: "Downloads" },
-    { number: "4.8", label: "Avaliação", icon: <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" /> },
-    { number: "1000+", label: "Oficinas Parceiras" }
+    { number: "", label: "Downloads" },
+    { number: "", label: "Avaliação", icon: <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" /> },
+    { number: "", label: "Oficinas Parceiras" }
   ];
 
   return (
@@ -89,6 +90,7 @@ export default function AppSection() {
             </div>
 
             {/* Stats */}
+            {/* Estatísticas temporariamente removidas até termos métricas reais
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -106,6 +108,7 @@ export default function AppSection() {
                 </div>
               ))}
             </motion.div>
+            */}
 
             {/* Download Buttons */}
             <motion.div
@@ -117,7 +120,7 @@ export default function AppSection() {
             >
               <a href="https://apps.apple.com/us/app/meca/id6743087361" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105 w-[160px] h-[53px] flex items-center">
                 <Image
-                  src={require('@/assets/buttonAppleStore.svg')}
+                  src={require('@/assets/buttonAppleStore.png')}
                   alt="Baixar na App Store"
                   width={160}
                   height={53}
@@ -146,7 +149,6 @@ export default function AppSection() {
             className="relative"
           >
             <div className="relative mx-auto max-w-lg">
-              <div className="relative overflow-hidden rounded-2xl shadow-2xl">
                 <Image 
                   src={mecaImg2} 
                   alt="App MECA interface" 
@@ -155,7 +157,6 @@ export default function AppSection() {
                   className="object-cover w-full"
                   quality={100}
                 />
-              </div>
             </div>
           </motion.div>
         </div>

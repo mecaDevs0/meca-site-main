@@ -1,6 +1,7 @@
 'use client';
 
-import mecaLogo from '@/assets/meca-logo.png';
+import mecaLogoBranco from '@/assets/meca-logo-branco.png';
+import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -74,7 +75,7 @@ export default function Navbar() {
               >
                 <div className="w-20 h-20 relative">
                   <Image 
-                    src={mecaLogo} 
+                    src={isScrolled ? mecaLogoVerde : mecaLogoBranco}
                     alt="MECA Logo" 
                     fill 
                     className="object-contain" 
@@ -98,7 +99,7 @@ export default function Navbar() {
                     onClick={(e) => scrollToSection(e, link.sectionId)}
                     className={`font-medium transition-colors hover:text-meca-verde relative px-2 py-1 ${
                       activeSection === link.sectionId 
-                        ? 'text-meca-verde' 
+                        ? isScrolled ? 'text-meca-verde' : 'text-white font-bold' 
                         : isScrolled ? 'text-gray-700' : 'text-white/90'
                     }`}
                   >
@@ -106,7 +107,7 @@ export default function Navbar() {
                     {activeSection === link.sectionId && (
                       <motion.span 
                         layoutId="activeSection"
-                        className="absolute bottom-0 left-0 h-0.5 w-full bg-meca-verde" 
+                        className={`absolute bottom-0 left-0 h-0.5 w-full ${isScrolled ? 'bg-meca-verde' : 'bg-white'}`}
                       />
                     )}
                   </Link>
@@ -178,7 +179,7 @@ export default function Navbar() {
                           onClick={(e) => scrollToSection(e, link.sectionId)}
                           className={`block py-3 text-lg font-medium transition-colors ${
                             activeSection === link.sectionId 
-                              ? 'text-meca-verde' 
+                              ? 'text-meca-verde font-bold' 
                               : 'text-gray-700 hover:text-meca-verde'
                           }`}
                         >

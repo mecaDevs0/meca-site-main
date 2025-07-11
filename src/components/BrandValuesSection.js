@@ -89,7 +89,7 @@ export default function BrandValuesSection() {
             O que nos <span className="text-meca-verde">move</span>
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Construímos a MECA baseados em princípios sólidos que guiam cada decisão 
+            Construímos o MECA baseados em princípios sólidos que guiam cada decisão 
             e moldam a experiência de nossos usuários.
           </p>
         </motion.div>

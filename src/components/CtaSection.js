@@ -119,7 +119,7 @@ export default function CtaSection() {
                   className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
                 >
                   <Image
-                    src={require('@/assets/buttonAppleStore.svg')}
+                    src={require('@/assets/buttonAppleStore.png')}
                     alt="Baixar na App Store"
                     width={160}
                     height={53}

@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import mecaImg1 from '@/assets/meca-img1.png';
-import { motion } from 'framer-motion';
-import { ArrowDown, Shield, Star, Users } from 'lucide-react';
-import Image from 'next/image';
+import mecaImg1 from "@/assets/meca-img1.png";
+import { motion } from "framer-motion";
+import { ArrowDown, Shield, Star, Users } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   const containerVariants = {
@@ -40,20 +40,21 @@ export default function HeroSection() {
     },
   };
 
+  // Comentado temporariamente até termos métricas reais
   const stats = [
-    { icon: <Users className="w-5 h-5" />, value: "50k+", label: "Usuários" },
-    { icon: <Star className="w-5 h-5" />, value: "4.8", label: "Avaliação" },
-    { icon: <Shield className="w-5 h-5" />, value: "1000+", label: "Oficinas" },
+    { icon: <Users className="w-5 h-5" />, value: "", label: "Usuários" },
+    { icon: <Star className="w-5 h-5" />, value: "", label: "Avaliação" },
+    { icon: <Shield className="w-5 h-5" />, value: "", label: "Oficinas" },
   ];
 
   return (
     <section className="relative min-h-screen bg-gradient-to-br from-meca-marinho via-meca-marinho to-gray-900 overflow-hidden">
       {/* Background Image Overlay */}
       <div className="absolute inset-0 opacity-20">
-        <Image 
-          src={mecaImg1} 
-          alt="MECA background" 
-          fill 
+        <Image
+          src={mecaImg1}
+          alt="MECA background"
+          fill
           quality={100}
           className="object-cover"
           priority
@@ -68,10 +69,13 @@ export default function HeroSection() {
 
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-10">
-        <div className="w-full h-full" style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(255,255,255) 1px, transparent 0)`,
-          backgroundSize: '50px 50px'
-        }}></div>
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(255,255,255) 1px, transparent 0)`,
+            backgroundSize: "50px 50px",
+          }}
+        ></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
@@ -84,16 +88,14 @@ export default function HeroSection() {
           <motion.div variants={itemVariants} className="flex justify-center">
             <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white/90">
               <span className="w-2 h-2 bg-meca-verde rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium">
-                Baixe o App MECA
-              </span>
+              <span className="text-sm font-medium">Baixe o App MECA</span>
             </div>
           </motion.div>
 
           {/* Main Heading */}
           <motion.div variants={itemVariants} className="space-y-6">
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none">
-              Quem vai de{' '}
+              Quem vai de{" "}
               <span className="relative">
                 <span className="text-meca-verde">MECA</span>
                 <motion.div
@@ -103,17 +105,19 @@ export default function HeroSection() {
                   transition={{ duration: 1, delay: 1 }}
                 />
               </span>
-              <br />
-              vai além!
+              <br className="mb-4" />
+              <span className="mt-6 pt-6 block">vai além!</span>
             </h1>
-            
+
             <motion.p
               variants={itemVariants}
               className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
-              A plataforma que conecta você às melhores oficinas da sua região.
+              O plataforma que conecta você às melhores oficinas da sua região.
               <br />
-              <span className="text-meca-verde font-medium">Rápido, seguro e confiável.</span>
+              <span className="text-meca-verde font-medium">
+                Rápido, seguro e confiável.
+              </span>
             </motion.p>
           </motion.div>
 
@@ -123,7 +127,7 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <div className="flex flex-col sm:flex-row gap-4 j">
-              <motion.a 
+              <motion.a
                 href="https://apps.apple.com/us/app/meca/id6743087361"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -132,15 +136,15 @@ export default function HeroSection() {
                 className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
               >
                 <Image
-                  src={require('@/assets/buttonAppleStore.svg')}
+                  src={require("@/assets/buttonAppleStore.png")}
                   alt="Baixar na App Store"
                   width={160}
                   height={53}
                   className="w-full h-auto object-contain"
                 />
               </motion.a>
-              
-              <motion.a 
+
+              <motion.a
                 href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -149,15 +153,15 @@ export default function HeroSection() {
                 className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
               >
                 <Image
-                  src={require('@/assets/buttonGooglePlay.png')}
+                  src={require("@/assets/buttonGooglePlay.png")}
                   alt="Baixar no Google Play"
                   width={160}
                   height={53}
-                  className="h-auto"
+                  className="w-full h-auto object-contain"
                 />
               </motion.a>
             </div>
-            
+
             {/* <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -168,7 +172,7 @@ export default function HeroSection() {
             </motion.button> */}
           </motion.div>
 
-          {/* Stats */}
+          {/* Stats - Temporariamente removidos até termos métricas reais 
           <motion.div
             variants={itemVariants}
             className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto pt-12"
@@ -185,10 +189,11 @@ export default function HeroSection() {
                   {stat.icon}
                   <span className="text-2xl font-bold">{stat.value}</span>
                 </div>
-                <p className="text-gray-400 text-sm">{stat.label}</p>
+                <p className="text-gray-300 text-sm">{stat.label}</p>
               </motion.div>
             ))}
           </motion.div>
+          */}
         </motion.div>
 
         {/* Floating Elements */}
@@ -208,7 +213,7 @@ export default function HeroSection() {
         <motion.div
           variants={floatingVariants}
           animate="animate"
-          style={{ animationDelay: '1s' }}
+          style={{ animationDelay: "1s" }}
           className="absolute bottom-32 left-8 lg:left-20 hidden lg:block"
         >
           <div className="bg-meca-verde rounded-2xl p-4 shadow-lg">

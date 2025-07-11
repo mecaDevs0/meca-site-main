@@ -119,11 +119,13 @@ export default function TestimonialsSection() {
               </div>
               <div className="text-sm text-gray-600">Google Play</div>
             </div>
+            {/* Métricas temporariamente removidas
             <div className="w-px h-12 bg-gray-300"></div>
             <div className="text-center">
               <div className="text-2xl font-bold text-gray-900">50k+</div>
               <div className="text-sm text-gray-600">Downloads</div>
             </div>
+            */}
           </div>
         </motion.div>
       </div>

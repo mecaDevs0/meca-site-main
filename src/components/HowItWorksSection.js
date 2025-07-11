@@ -24,7 +24,7 @@ export default function HowItWorksSection() {
     {
       step: "03",
       icon: <Wrench className="w-8 h-8" />,
-      title: "Acompanhe em tempo real",
+      title: "Monitoramento ao vivo",
       description: "Receba atualizações sobre o progresso do serviço pelo aplicativo",
       color: "from-orange-500 to-red-600"
     },
