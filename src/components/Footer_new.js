@@ -85,7 +85,7 @@ export default function Footer() {
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <Phone className="w-5 h-5 text-meca-verde" />
-                    <span>(11) 97477-2390</span>
+                    <span>(11) 3064-4243</span>
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300">
                     <MapPin className="w-5 h-5 text-meca-verde" />
@@ -249,9 +249,13 @@ export default function Footer() {
                 Segurança
               </Link>
             </div>
-            
-            <div className="text-sm text-gray-400">
-              © {currentYear} MECA. Todos os direitos reservados.
+
+            <div className="text-sm text-gray-400 text-center md:text-right space-y-1 md:space-y-0 md:space-x-4 flex flex-col md:flex-row md:items-center">
+              <span key="copyright">© {currentYear} MECA. Todos os direitos reservados.</span>
+              <span key="sep1" className="hidden md:inline">|</span>
+              <span key="cnpj">CNPJ: 56.390.849-0001/73</span>
+              <span key="sep2" className="hidden md:inline">|</span>
+              <span key="endereco">Endereço: Rua Padre João Manuel 235, conjunto 41</span>
             </div>
           </div>
         </motion.div>

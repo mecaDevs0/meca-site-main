@@ -198,7 +198,7 @@ A landing page foi otimizada para maximizar conversões através de:
 ## 📞 Contato e Suporte
 
 - **Email**: contato@mecabr.com 
-- **Telefone**: (11) 97477-2390
+- **Telefone**: (11) 3064-4243
 - **Localização**: São Paulo, Brasil
 
 ## 🔄 Próximas Atualizações

@@ -113,7 +113,7 @@ export default function HeroSection() {
               variants={itemVariants}
               className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
             >
-              O plataforma que conecta você às melhores oficinas da sua região.
+              A plataforma que conecta você às melhores oficinas da sua região.
               <br />
               <span className="text-meca-verde font-medium">
                 Rápido, seguro e confiável.

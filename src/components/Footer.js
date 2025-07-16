@@ -1,9 +1,10 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { ExternalLink, Instagram, Mail, MapPin, Phone } from 'lucide-react';
+import { ExternalLink, Gavel, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import React from 'react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -88,7 +89,11 @@ export default function Footer() {
                   </div>
                   <div className="flex items-center space-x-3 text-gray-300 justify-center sm:justify-start">
                     <MapPin className="w-5 h-5 text-meca-verde" />
-                    <span>São Paulo, Brasil</span>
+                    <span>Rua Padre João Manuel 235, conjunto 41, São Paulo, Brasil</span>
+                  </div>
+                  <div className="flex items-center space-x-3 text-gray-300 justify-center sm:justify-start">
+                    <Gavel className="w-5 h-5 text-meca-verde" />
+                    <span>CNPJ: 56.390.849-0001/73</span>
                   </div>
                 </div>
                 {/* Social Links */}
@@ -114,9 +119,8 @@ export default function Footer() {
             <div className="lg:col-span-8">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-left">
                 {footerSections.map((section, index) => (
-                  <>
+                  <React.Fragment key={section.title}>
                     <motion.div
-                      key={section.title}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.6, delay: index * 0.1 }}
@@ -165,7 +169,7 @@ export default function Footer() {
                         <div className="h-px w-24 bg-gray-600/40 rounded-full" />
                       </div>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </div>
             </div>
@@ -197,7 +201,7 @@ export default function Footer() {
             </div>
             
             <div className="text-sm text-gray-400">
-              © {currentYear} MECA. Todos os direitos reservados.
+              © {currentYear} - Meca Serviços e Benefícios.
             </div>
           </div>
         </motion.div>
