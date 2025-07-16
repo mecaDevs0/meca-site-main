@@ -138,7 +138,7 @@ export default function FAQSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <motion.a
-                href="https://wa.me/5511974772390?text=Ola,%20vim%20atravez%20do%20site%20da%20meca%20e%20estou%20com%20duvidas"
+                href="https://wa.me/551130644243?text=Ola,%20vim%20através%20do%20site%20da%20meca%20e%20estou%20com%20duvidas"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}

@@ -140,9 +140,15 @@ export default function HowItWorksSection() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-24"
+          whileHover={{ scale: 1.015 }}
+          className="mt-24 group"
         >
-          <div className="bg-white border-2 border-meca-verde/20 rounded-[2.5rem] p-12 text-gray-800 relative overflow-hidden shadow-xl">
+          <div className="bg-white border-2 border-meca-verde/20 rounded-[2.5rem] p-12 text-gray-800 relative overflow-hidden shadow-xl transition-transform duration-300 group-hover:scale-105 cursor-pointer"
+            onClick={() => window.open('http://linktr.ee/mecabr', '_blank')}
+            role="button"
+            tabIndex={0}
+            onKeyPress={e => { if (e.key === 'Enter') window.open('http://linktr.ee/mecabr', '_blank'); }}
+          >
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-meca-verde/20 to-blue-300/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
             <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-meca-marinho/20 to-purple-300/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/3"></div>
@@ -189,15 +195,15 @@ export default function HowItWorksSection() {
             </div>
 
             <div className="text-center mt-16">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-meca-verde to-meca-marinho text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto"
+              <div
+                className="bg-gradient-to-r from-meca-verde to-meca-marinho text-white px-10 py-4 rounded-full font-semibold text-lg shadow-lg hover:shadow-xl transition-all duration-300 flex items-center space-x-2 mx-auto w-fit cursor-pointer group-hover:scale-105 group/button"
                 style={{ display: 'inline-flex' }}
               >
                 <span>Experimente Agora</span>
-                <ArrowRight className="w-5 h-5" />
-              </motion.button>
+                <span className="transition-transform duration-300 group-hover/button:translate-x-1">
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              </div>
               <p className="text-gray-500 text-sm mt-4">
                 Comece a transformar sua experiência automotiva hoje mesmo
               </p>

@@ -15,7 +15,10 @@ export default function Footer() {
         { name: "Baixar App", href: "https://apps.apple.com/us/app/meca/id6743087361", external: true },
         { name: "Como Funciona", href: "#como-funciona" },
         { name: "Encontrar Oficinas", href: "#motoristas" },
-        { name: "Suporte", href: "mailto:contato@mecabr.com?subject=Suporte" }
+        { name: "Suporte", href: "mailto:contato@mecabr.com?subject=Suporte" },
+        // Botões visuais das lojas
+        { name: "App Store", href: "https://apps.apple.com/us/app/meca/id6743087361", external: true, isStoreImg: true, img: require('@/assets/buttonAppleStore.png'), alt: 'Cliente - App Store' },
+        { name: "Google Play", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1", external: true, isStoreImg: true, img: require('@/assets/buttonGooglePlay.png'), alt: 'Cliente - Google Play' }
       ]
     },
     {
@@ -24,7 +27,10 @@ export default function Footer() {
         { name: "Cadastrar Oficina", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true },
         { name: "Painel de Gestão", href: "#oficinas" },
         { name: "Planos e Preços", href: "#sobre" },
-        { name: "Central de Ajuda", href: "mailto:contato@mecabr.com?subject=Central%20de%20Ajuda" }
+        { name: "Central de Ajuda", href: "mailto:contato@mecabr.com?subject=Central%20de%20Ajuda" },
+        // Botões visuais das lojas
+        { name: "App Store", href: "https://apps.apple.com/us/app/meca-oficina/id6476768852", external: true, isStoreImg: true, img: require('@/assets/buttonAppleStore.png'), alt: 'Oficina - App Store' },
+        { name: "Google Play", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true, isStoreImg: true, img: require('@/assets/buttonGooglePlay.png'), alt: 'Oficina - Google Play' }
       ]
     },
     {
@@ -49,7 +55,6 @@ export default function Footer() {
         {/* Main Footer Content */}
         <div className="py-16">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-            
             {/* Brand Column */}
             <div className="lg:col-span-4">
               <motion.div
@@ -57,9 +62,10 @@ export default function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
                 viewport={{ once: true }}
+                className="sm:block flex flex-col items-center text-center sm:text-left"
               >
                 <div className="mb-6">
-                  <div className="flex items-center space-x-2 mb-4">
+                  <div className="flex items-center space-x-2 mb-4 justify-center sm:justify-start">
                     <div className="w-10 h-10 bg-meca-verde rounded-xl flex items-center justify-center">
                       <span className="font-bold text-xl text-white">M</span>
                     </div>
@@ -70,25 +76,23 @@ export default function Footer() {
                     <span className="text-meca-verde font-medium"> Quem vai de MECA, vai além!</span>
                   </p>
                 </div>
-
                 {/* Contact Info */}
                 <div className="space-y-3 mb-6">
-                  <div className="flex items-center space-x-3 text-gray-300">
+                  <div className="flex items-center space-x-3 text-gray-300 justify-center sm:justify-start">
                     <Mail className="w-5 h-5 text-meca-verde" />
                     <span>contato@mecabr.com </span>
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-300">
+                  <div className="flex items-center space-x-3 text-gray-300 justify-center sm:justify-start">
                     <Phone className="w-5 h-5 text-meca-verde" />
-                    <span>(11) 97477-2390</span>
+                    <span>(11) 3064-4243</span>
                   </div>
-                  <div className="flex items-center space-x-3 text-gray-300">
+                  <div className="flex items-center space-x-3 text-gray-300 justify-center sm:justify-start">
                     <MapPin className="w-5 h-5 text-meca-verde" />
                     <span>São Paulo, Brasil</span>
                   </div>
                 </div>
-
                 {/* Social Links */}
-                <div className="flex space-x-4">
+                <div className="flex space-x-4 justify-center sm:justify-start mb-4">
                   {socialLinks.map((social, index) => {
                     const Icon = social.icon;
                     return (
@@ -106,97 +110,64 @@ export default function Footer() {
                 </div>
               </motion.div>
             </div>
-
             {/* Links Columns */}
-            <div className="lg:col-span-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="lg:col-span-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-left">
                 {footerSections.map((section, index) => (
-                  <motion.div
-                    key={section.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: index * 0.1 }}
-                    viewport={{ once: true }}
-                  >
-                    <h3 className="font-semibold text-lg mb-6 text-white">
-                      {section.title}
-                    </h3>
-                    <ul className="space-y-4">
-                      {section.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          <Link
-                            href={link.href}
-                            className="text-gray-300 hover:text-meca-verde transition-colors duration-200 flex items-center space-x-2 group"
-                          >
-                            <span>{link.name}</span>
-                            {link.external && (
-                              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <>
+                    <motion.div
+                      key={section.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.6, delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex flex-col items-center md:items-start"
+                    >
+                      <h3 className="font-semibold text-2xl md:text-lg mb-6 text-white text-center md:text-left">
+                        {section.title}
+                      </h3>
+                      <ul className="space-y-4 w-full flex flex-col items-center md:items-start">
+                        {section.links.map((link, linkIndex) => (
+                          <li key={linkIndex}>
+                            {link.isStoreImg ? (
+                              <a
+                                href={link.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center"
+                              >
+                                <Image
+                                  src={link.img}
+                                  alt={link.alt}
+                                  width={140}
+                                  height={46}
+                                  className="w-[140px] h-auto object-contain"
+                                />
+                              </a>
+                            ) : (
+                              <Link
+                                href={link.href}
+                                className="text-gray-300 hover:text-meca-verde transition-colors duration-200 flex items-center space-x-2 group"
+                              >
+                                <span>{link.name}</span>
+                                {link.external && (
+                                  <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                )}
+                              </Link>
                             )}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </motion.div>
+                          </li>
+                        ))}
+                      </ul>
+                    </motion.div>
+                    {/* Divider only on mobile, not after last column */}
+                    {index < footerSections.length - 1 && (
+                      <div className="w-full flex justify-center my-6 md:hidden">
+                        <div className="h-px w-24 bg-gray-600/40 rounded-full" />
+                      </div>
+                    )}
+                  </>
                 ))}
               </div>
-            </div>
-
-            {/* Download Column */}
-            <div className="lg:col-span-2">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                <h3 className="font-semibold text-lg mb-6 text-white">
-                  Baixe o App
-                </h3>
-                <div className="space-y-4">
-                  <motion.a 
-                    href="https://apps.apple.com/us/app/meca/id6743087361"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="transition-all duration-300 w-[140px] h-[46px] flex items-center"
-                  >
-                    <Image
-                      src={require('@/assets/buttonAppleStore.png')}
-                      alt="Baixar na App Store"
-                      width={140}
-                      height={46}
-                      className="w-full h-auto object-contain"
-                    />
-                  </motion.a>
-                  
-                  <motion.a 
-                    href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="transition-all duration-300 w-[140px] h-[46px] flex items-center"
-                  >
-                    <Image
-                      src={require('@/assets/buttonGooglePlay.png')}
-                      alt="Baixar no Google Play"
-                      width={150}
-                      height={50}
-                      className="h-auto"
-                    />
-                  </motion.a>
-                </div>
-
-                {/* Stats - Temporariamente removidos
-                <div className="mt-8 p-4 bg-white/5 rounded-xl">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-meca-verde mb-1">50k+</div>
-                    <div className="text-sm text-gray-400">Downloads</div>
-                  </div>
-                </div>
-                */}
-              </motion.div>
             </div>
           </div>
         </div>

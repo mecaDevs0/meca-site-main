@@ -59,9 +59,11 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.6 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled 
-            ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-            : 'bg-meca-verde/70 backdrop-blur-sm'
+          isMenuOpen
+            ? 'bg-meca-marinho shadow-xl border-b border-meca-marinho'
+            : isScrolled 
+              ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
+              : 'bg-meca-verde/70 backdrop-blur-sm'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -148,25 +150,26 @@ export default function Navbar() {
               
               {/* Menu Panel */}
               <motion.div
-                initial={{ x: '100%' }}
-                animate={{ x: 0 }}
-                exit={{ x: '100%' }}
-                transition={{ type: 'spring', damping: 20, stiffness: 300 }}
-                className="fixed top-0 right-0 h-full w-80 max-w-sm bg-white shadow-2xl z-50"
+                initial={{ x: 400, opacity: 0 }}
+                animate={{ x: 0, opacity: 1 }}
+                exit={{ x: 400, opacity: 0 }}
+                transition={{ type: 'tween', duration: 0.35, ease: [0.4, 0.0, 0.2, 1] }}
+                className="fixed top-0 right-0 h-full w-80 max-w-sm bg-meca-marinho shadow-2xl z-50 flex flex-col rounded-l-3xl border-l-2 border-meca-verde/30"
               >
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   {/* Close Button */}
                   <div className="flex justify-end mb-8">
                     <button
                       onClick={() => setIsMenuOpen(false)}
-                      className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                      className="p-2 hover:bg-meca-verde/20 rounded-lg transition-colors"
+                      aria-label="Fechar menu"
                     >
-                      <X className="w-6 h-6 text-gray-600" />
+                      <X className="w-7 h-7 text-white" />
                     </button>
                   </div>
 
                   {/* Mobile Navigation Links */}
-                  <div className="space-y-6">
+                  <nav className="flex-1 flex flex-col justify-center space-y-6 mt-8">
                     {navLinks.map((link, index) => (
                       <motion.div
                         key={link.name}
@@ -177,26 +180,26 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           onClick={(e) => scrollToSection(e, link.sectionId)}
-                          className={`block py-3 text-lg font-medium transition-colors ${
+                          className={`block py-4 text-2xl font-semibold rounded-xl text-center transition-all duration-200 ${
                             activeSection === link.sectionId 
-                              ? 'text-meca-verde font-bold' 
-                              : 'text-gray-700 hover:text-meca-verde'
+                              ? 'bg-meca-verde text-white shadow-lg' 
+                              : 'text-white hover:bg-meca-verde/20 hover:text-meca-verde'
                           }`}
                         >
                           {link.name}
                         </Link>
                       </motion.div>
                     ))}
-                  </div>
+                  </nav>
 
                   {/* Contact Info */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: 0.5 }}
-                    className="mt-8 pt-8 border-t border-gray-200 text-center"
+                    className="mt-8 pt-8 border-t border-meca-verde/30 text-center"
                   >
-                    <p className="text-sm text-gray-600 mb-2">Dúvidas? Fale conosco:</p>
+                    <p className="text-sm text-white/80 mb-2">Dúvidas? Fale conosco:</p>
                     <p className="text-sm font-medium text-meca-verde">contato@mecabr.com </p>
                   </motion.div>
                 </div>
