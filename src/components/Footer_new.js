@@ -15,7 +15,10 @@ export default function Footer() {
         { name: "Baixar App", href: "https://apps.apple.com/us/app/meca/id6743087361", external: true },
         { name: "Como Funciona", href: "#como-funciona" },
         { name: "Encontrar Oficinas", href: "#motoristas" },
-        { name: "Suporte", href: "mailto:contato@mecabr.com?subject=Suporte" }
+        { name: "Suporte", href: "mailto:contato@mecabr.com?subject=Suporte" },
+        // Botões visuais das lojas
+        { name: "App Store", href: "https://apps.apple.com/us/app/meca/id6743087361", external: true, isStoreImg: true, img: require('@/assets/buttonAppleStore.png'), alt: 'Cliente - App Store' },
+        { name: "Google Play", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1", external: true, isStoreImg: true, img: require('@/assets/buttonGooglePlay.png'), alt: 'Cliente - Google Play' }
       ]
     },
     {
@@ -24,7 +27,10 @@ export default function Footer() {
         { name: "Cadastrar Oficina", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true },
         { name: "Painel de Gestão", href: "#oficinas" },
         { name: "Planos e Preços", href: "#sobre" },
-        { name: "Central de Ajuda", href: "mailto:contato@mecabr.com?subject=Central%20de%20Ajuda" }
+        { name: "Central de Ajuda", href: "mailto:contato@mecabr.com?subject=Central%20de%20Ajuda" },
+        // Botões visuais das lojas
+        { name: "App Store", href: "https://apps.apple.com/us/app/meca-oficina/id6476768852", external: true, isStoreImg: true, img: require('@/assets/buttonAppleStore.png'), alt: 'Oficina - App Store' },
+        { name: "Google Play", href: "https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina", external: true, isStoreImg: true, img: require('@/assets/buttonGooglePlay.png'), alt: 'Oficina - Google Play' }
       ]
     },
     {
@@ -123,16 +129,35 @@ export default function Footer() {
                     </h3>
                     <ul className="space-y-4">
                       {section.links.map((link, linkIndex) => (
-                        <li key={linkIndex}>
-                          <Link
-                            href={link.href}
-                            className="text-gray-300 hover:text-meca-verde transition-colors duration-200 flex items-center space-x-2 group"
-                          >
-                            <span>{link.name}</span>
-                            {link.external && (
-                              <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
-                            )}
-                          </Link>
+                        <li key={link.name + '-' + linkIndex}>
+                          {link.isStoreImg ? (
+                            <motion.a
+                              href={link.href}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              whileHover={{ scale: 1.05 }}
+                              whileTap={{ scale: 0.95 }}
+                              className="transition-all duration-300 w-[140px] h-[46px] flex items-center mb-2"
+                            >
+                              <Image
+                                src={link.img}
+                                alt={link.alt}
+                                width={140}
+                                height={46}
+                                className="w-full h-auto object-contain"
+                              />
+                            </motion.a>
+                          ) : (
+                            <Link
+                              href={link.href}
+                              className="text-gray-300 hover:text-meca-verde transition-colors duration-200 flex items-center space-x-2 group"
+                            >
+                              <span>{link.name}</span>
+                              {link.external && (
+                                <ExternalLink className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                              )}
+                            </Link>
+                          )}
                         </li>
                       ))}
                     </ul>
