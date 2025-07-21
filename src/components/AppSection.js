@@ -118,7 +118,25 @@ export default function AppSection() {
               viewport={{ once: true }}
               className="flex flex-col sm:flex-row gap-4"
             >
-              <a href="https://apps.apple.com/us/app/meca/id6743087361" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105 w-[160px] h-[53px] flex items-center">
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'conversion', {
+                      'send_to': 'AW-17215013580/NccNCNH9o_UaEMyF4ZBA',
+                      'event_callback': function () {
+                        window.location = 'https://apps.apple.com/us/app/meca/id6743087361';
+                      }
+                    });
+                  } else {
+                    window.location = 'https://apps.apple.com/us/app/meca/id6743087361';
+                  }
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-105 w-[160px] h-[53px] flex items-center"
+              >
                 <Image
                   src={require('@/assets/buttonAppleStore.png')}
                   alt="Baixar na App Store"
@@ -127,8 +145,26 @@ export default function AppSection() {
                   className="w-full h-auto object-contain"
                 />
               </a>
-              
-              <a href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1" target="_blank" rel="noopener noreferrer" className="transition-transform hover:scale-105 w-[160px] h-[53px] flex items-center">
+
+              <a
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (typeof window !== 'undefined' && window.gtag) {
+                    window.gtag('event', 'conversion', {
+                      'send_to': 'AW-17215013580/NccNCNH9o_UaEMyF4ZBA',
+                      'event_callback': function () {
+                        window.location = 'https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1';
+                      }
+                    });
+                  } else {
+                    window.location = 'https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1';
+                  }
+                }}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="transition-transform hover:scale-105 w-[160px] h-[53px] flex items-center"
+              >
                 <Image
                   src={require('@/assets/buttonGooglePlay.png')}
                   alt="Baixar no Google Play"
