@@ -11,7 +11,7 @@ module.exports = {
         sans: ['Ubuntu', 'sans-serif'],
       },
       colors: {
-        'meca-verde': '#00c977',
+        'meca-verde': '#41b173',
         'meca-marinho': '#252940',
         'meca-branco': '#FFFFFF',
       },

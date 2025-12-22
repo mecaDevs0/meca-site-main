@@ -1,6 +1,9 @@
 "use client";
 
+import buttonAppleStore from "@/assets/buttonAppleStore.png";
+import buttonGooglePlay from "@/assets/buttonGooglePlay.png";
 import mecaImg1 from "@/assets/meca-img1.png";
+import mecaHeaderMobile from "@/assets/Meca_Header_Branco_Mobile.png";
 import { motion } from "framer-motion";
 import { ArrowDown, Shield, Star, Users } from "lucide-react";
 import Image from "next/image";
@@ -48,98 +51,106 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-meca-marinho via-meca-marinho to-gray-900 overflow-hidden">
-      {/* Background Image Overlay */}
-      <div className="absolute inset-0 opacity-20">
+    <section 
+      className="relative min-h-screen overflow-hidden flex flex-col w-full"
+      style={{ 
+        width: '100vw',
+        maxWidth: '100vw',
+        margin: 0,
+        padding: 0,
+        marginTop: 0,
+        marginLeft: 0,
+        marginRight: 0,
+        position: 'relative',
+        minHeight: '100vh',
+      }}
+    >
+      {/* Background Image - Desktop apenas */}
+      <div 
+        className="absolute inset-0 z-0 hidden md:block"
+        style={{
+          width: '100%',
+          height: '100%',
+          left: 0,
+          right: 0,
+          top: 0,
+          bottom: 0,
+          margin: 0,
+          padding: 0,
+          position: 'absolute',
+        }}
+      >
+        <div 
+          className="relative w-full h-full"
+          style={{
+            width: '100%',
+            height: '100%',
+            margin: 0,
+            padding: 0,
+            position: 'relative',
+          }}
+        >
+          <Image
+            src={mecaImg1}
+            alt="MECA background"
+            fill
+            quality={100}
+            className="object-cover"
+            style={{ 
+              objectPosition: 'right center',
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              display: 'block',
+            }}
+            sizes="100vw"
+            priority
+          />
+        </div>
+      </div>
+
+      {/* Overlay Desktop */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10 pointer-events-none hidden md:block"></div>
+
+      {/* Background Mobile - Imagem Meca_Header_Branco_Mobile.png */}
+      <div className="absolute inset-0 z-0 md:hidden">
         <Image
-          src={mecaImg1}
-          alt="MECA background"
+          src={mecaHeaderMobile}
+          alt="MECA Mobile Header"
           fill
           quality={100}
           className="object-cover"
+          style={{ 
+            objectPosition: 'center center',
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
+          }}
+          sizes="100vw"
           priority
         />
-      </div>
+              </div>
 
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-20 left-20 w-72 h-72 bg-meca-verde rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-meca-verde rounded-full blur-3xl"></div>
-      </div>
-
-      {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, rgb(255,255,255) 1px, transparent 0)`,
-            backgroundSize: "50px 50px",
-          }}
-        ></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="text-center space-y-12"
-        >
-          <motion.div variants={itemVariants} className="flex justify-center">
-            <div className="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-6 py-3 text-white/90">
-              <span className="w-2 h-2 bg-meca-verde rounded-full animate-pulse"></span>
-              <span className="text-sm font-medium">Baixe o App MECA</span>
-            </div>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.div variants={itemVariants} className="space-y-6">
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white leading-none">
-              Quem vai de{" "}
-              <span className="relative">
-                <span className="text-meca-verde">MECA</span>
-                <motion.div
-                  className="absolute -bottom-2 left-0 w-full h-1 bg-meca-verde"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: 1 }}
-                />
-              </span>
-              <br className="mb-4" />
-              <span className="mt-6 pt-6 block">vai além!</span>
-            </h1>
-
-            <motion.p
+      {/* Desktop: CTA Buttons - Menores, na direita, posicionados mais abaixo */}
+            <motion.div
               variants={itemVariants}
-              className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+        className="hidden md:flex flex-col gap-3 absolute right-8 z-30"
+        style={{ top: '20rem', right: '2rem' }}
             >
-              A plataforma que conecta você às melhores oficinas da sua região.
-              <br />
-              <span className="text-meca-verde font-medium">
-                Rápido, seguro e confiável.
-              </span>
-            </motion.p>
-          </motion.div>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <div className="flex flex-col sm:flex-row gap-4 j">
               <motion.a
                 href="https://apps.apple.com/us/app/meca/id6743087361"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+          className="transition-all duration-300 w-[140px] h-[46px] flex items-center drop-shadow-2xl z-30"
               >
                 <Image
-                  src={require("@/assets/buttonAppleStore.png")}
+            src={buttonAppleStore}
                   alt="Baixar na App Store"
-                  width={160}
-                  height={53}
+            width={140}
+            height={46}
                   className="w-full h-auto object-contain"
                 />
               </motion.a>
@@ -150,79 +161,31 @@ export default function HeroSection() {
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+          className="transition-all duration-300 w-[140px] h-[46px] flex items-center drop-shadow-2xl z-30"
               >
                 <Image
-                  src={require("@/assets/buttonGooglePlay.png")}
+            src={buttonGooglePlay}
                   alt="Baixar no Google Play"
-                  width={160}
-                  height={53}
+            width={140}
+            height={46}
                   className="w-full h-auto object-contain"
                 />
               </motion.a>
-            </div>
+            </motion.div>
 
-            {/* <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group bg-white/10 backdrop-blur-sm border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-lg hover:bg-white/20 transition-all duration-300 flex items-center space-x-2"
-            >
-              <Play className="w-5 h-5" />
-              <span>Ver Demo</span>
-            </motion.button> */}
-          </motion.div>
-
-          {/* Stats - Temporariamente removidos até termos métricas reais 
+      {/* Conteúdo Mobile - Sem texto, apenas imagem de fundo */}
+      <div className="relative z-20 flex-1 flex flex-col justify-center items-center min-h-0 pt-20 md:pt-20 md:justify-end px-4 md:px-0">
+        <div className="w-full max-w-4xl mx-auto text-center md:text-left">
+          {/* Mobile: Sem texto - apenas imagem de fundo */}
           <motion.div
-            variants={itemVariants}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-2xl mx-auto pt-12"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="flex flex-col items-center md:items-start space-y-6 md:space-y-6"
           >
-            {stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: 1.2 + index * 0.1 }}
-                className="text-center space-y-2"
-              >
-                <div className="flex items-center justify-center space-x-2 text-meca-verde">
-                  {stat.icon}
-                  <span className="text-2xl font-bold">{stat.value}</span>
-                </div>
-                <p className="text-gray-300 text-sm">{stat.label}</p>
-              </motion.div>
-            ))}
+            {/* Mobile: Texto removido - apenas imagem de fundo */}
           </motion.div>
-          */}
-        </motion.div>
-
-        {/* Floating Elements */}
-        <motion.div
-          variants={floatingVariants}
-          animate="animate"
-          className="absolute top-32 right-8 lg:right-20 hidden lg:block"
-        >
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
-            <div className="flex items-center space-x-3">
-              <div className="w-3 h-3 bg-meca-verde rounded-full animate-pulse"></div>
-              <span className="text-white text-sm">1000+ oficinas online</span>
-            </div>
-          </div>
-        </motion.div>
-
-        <motion.div
-          variants={floatingVariants}
-          animate="animate"
-          style={{ animationDelay: "1s" }}
-          className="absolute bottom-32 left-8 lg:left-20 hidden lg:block"
-        >
-          <div className="bg-meca-verde rounded-2xl p-4 shadow-lg">
-            <div className="text-white text-sm">
-              <p className="font-semibold">Orçamento aprovado!</p>
-              <p className="opacity-90">R$ 89,90</p>
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
@@ -230,7 +193,7 @@ export default function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}

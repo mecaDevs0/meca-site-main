@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="w-full">
+      <main className="w-full overflow-x-hidden">
         <HeroSection />
         <section id="motoristas">
           <ServicesSection />

@@ -75,7 +75,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 className="flex items-center space-x-2"
               >
-                <div className="w-20 h-20 relative">
+                <div className="w-32 h-32 relative">
                   <Image 
                     src={isScrolled ? mecaLogoVerde : mecaLogoBranco}
                     alt="MECA Logo" 
@@ -210,7 +210,6 @@ export default function Navbar() {
       </motion.nav>
 
       {/* Spacer to prevent content from being hidden behind fixed navbar */}
-      <div className="h-16 lg:h-20"></div>
     </>
   );
 }
