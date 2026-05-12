@@ -258,6 +258,24 @@ export default function Footer() {
               <span key="endereco">Endereço: Rua Padre João Manuel 235, conjunto 41</span>
             </div>
           </div>
+
+          {/* Selo Asaas — serviços financeiros */}
+          <div className="mt-6 flex justify-center">
+            <a
+              href="https://www.asaas.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="opacity-60 hover:opacity-100 transition-opacity"
+            >
+              <img
+                src="https://baas.asaas.com/selos/Servicos_financeiros_Asaas-Reduzida-Negativo-Branco.svg?id=2a6ee772-f63f-424d-9d0e-1a3811b0f64c"
+                alt="Serviços financeiros por Asaas"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+              />
+            </a>
+          </div>
         </motion.div>
       </div>
     </footer>
