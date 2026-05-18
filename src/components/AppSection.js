@@ -178,101 +178,29 @@ export default function AppSection() {
             </motion.div>
           </motion.div>
 
-          {/* Lado Direito - Imagem do App - MOBILE: melhorado, DESKTOP: à direita do texto, MUITO MAIOR */}
+          {/* Lado Direito - Imagem do App */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative flex items-center justify-center order-2 lg:order-2 w-full overflow-visible mt-8 lg:mt-0"
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+            className="relative flex items-center justify-center order-2 lg:order-2 w-full mt-8 lg:mt-0"
           >
-            {/* Mobile: Container melhorado com melhor espaçamento e visual */}
-            <div className="relative w-full flex items-center justify-center py-4 md:py-0 lg:py-0" style={{ 
-              width: '100%', 
-              display: 'flex', 
-              justifyContent: 'center',
-              paddingTop: '1rem',
-              paddingBottom: '1rem',
-            }}>
-              <div 
-                className="relative w-full flex items-center justify-center" 
-                style={{ 
-                  maxWidth: '100%',
-                  width: '100%',
-                  margin: '0 auto',
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  padding: 0,
-                }}
-              >
-                {/* Mobile: Imagem otimizada e melhor posicionada - AUMENTADA */}
-                <div className="w-full max-w-[500px] md:hidden flex justify-center">
-                <Image 
-                  src={mecaImg2} 
-                  alt="App MECA interface - Seu carro na palma da mão" 
-                  width={3200}
-                  height={4000}
-                  className="w-full h-auto object-contain drop-shadow-2xl"
-                    style={{
-                      display: 'block',
-                      marginLeft: 'auto',
-                      marginRight: 'auto',
-                      width: '100%',
-                      height: 'auto',
-                      transform: 'scale(1.2)',
-                      transformOrigin: 'center center',
-                    }}
-                    quality={100}
-                    priority
-                  />
-                </div>
-                
-                {/* Desktop: Imagem MUITO maior - escala aumentada significativamente */}
-                <div className="hidden md:block w-full h-full flex items-center justify-center" style={{
-                  width: '100%',
-                  height: '100%',
-                  minHeight: '600px',
-                }}>
-                  <div className="relative flex justify-center items-center" style={{
-                    width: '100%',
-                    height: '100%',
-                  }}>
-                    <Image 
-                      src={mecaImg2} 
-                      alt="App MECA interface - Seu carro na palma da mão" 
-                      width={3200}
-                      height={4000}
-                      className="object-contain drop-shadow-2xl"
-                      style={{
-                        display: 'block',
-                        width: 'auto',
-                        height: 'auto',
-                        maxWidth: 'none',
-                        maxHeight: 'none',
-                        minWidth: '600px',
-                        minHeight: '800px',
-                        transform: 'scale(2.0)',
-                        transformOrigin: 'center center',
-                      }}
-                  quality={100}
-                  priority
-                      sizes="(min-width: 1024px) 80vw, (min-width: 1280px) 100vw, 120vw"
-                />
-                  </div>
-                </div>
-              </div>
+            <div className="relative w-full max-w-md lg:max-w-xl flex items-center justify-center">
+              <Image 
+                src={mecaImg2} 
+                alt="App MECA interface - Seu carro na palma da mão" 
+                width={800}
+                height={1000}
+                className="w-full h-auto object-contain drop-shadow-2xl"
+                quality={90}
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
             </div>
           </motion.div>
         </div>
       </div>
     </section>
   );
-}
-
 }
