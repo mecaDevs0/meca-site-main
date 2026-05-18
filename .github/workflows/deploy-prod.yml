@@ -72,18 +72,17 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Export estático
+      - name: Verificar export estático
         id: export
         run: |
-          if npx next export -o out 2>/dev/null; then
+          if [ -d "out" ] && [ -f "out/index.html" ]; then
             echo "mode=static" >> $GITHUB_OUTPUT
-            echo "Export estático: OK"
+            echo "Static export gerado pelo next build (output: 'export')"
             ls -lh out/ | head -20
           else
             echo "mode=ssr" >> $GITHUB_OUTPUT
-            echo "Export estático não disponível — o site usa recursos SSR"
+            echo "Pasta out/ não encontrada — o site usa SSR"
           fi
-        continue-on-error: true
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -128,12 +127,11 @@ jobs:
             --region us-east-1)
           echo "CloudFront invalidation criada: $INVALIDATION_ID"
 
-      - name: Deploy SSR — instrução para container
+      - name: Deploy SSR — aviso
         if: steps.export.outputs.mode == 'ssr'
         run: |
-          echo "## Site MECA — Deploy Container Necessário" >> $GITHUB_STEP_SUMMARY
-          echo "O site usa recursos SSR (getServerSideProps ou Server Components dinâmicos)." >> $GITHUB_STEP_SUMMARY
-          echo "Configure um ECS Service ou Vercel para este projeto." >> $GITHUB_STEP_SUMMARY
+          echo "::error::Pasta out/ não encontrada. Verifique se next.config.js tem output: 'export'"
+          exit 1
 
       - name: Smoke test
         if: steps.export.outputs.mode == 'static'
