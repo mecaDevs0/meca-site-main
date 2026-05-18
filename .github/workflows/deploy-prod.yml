@@ -122,7 +122,7 @@ jobs:
         run: |
           INVALIDATION_ID=$(aws cloudfront create-invalidation \
             --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
-            --paths "/*.html" "/sitemap.xml" "/robots.txt" \
+            --paths "/*" \
             --query "Invalidation.Id" \
             --output text \
             --region us-east-1)
