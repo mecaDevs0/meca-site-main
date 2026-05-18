@@ -39,13 +39,13 @@ const faqs = [
     category: 'oficina',
     question: 'Como funciona o financeiro para as oficinas?',
     answer:
-      'Os pagamentos feitos pelos clientes são processados com segurança pela instituição financeira parceira e repassados para sua oficina conforme o calendário de liquidação. Você acompanha tudo pelo app: serviços realizados, valores a receber e histórico.',
+      'Os pagamentos feitos pelos clientes são processados com segurança pela Asaas Gestão Financeira S.A., instituição financeira parceira, e repassados para sua oficina conforme o calendário de liquidação. Você acompanha tudo pelo app: serviços realizados, valores a receber e histórico.',
   },
   {
     category: 'oficina',
     question: 'A plataforma cobra alguma taxa?',
     answer:
-      'A MECA cobra uma taxa de intermediação de serviço, já inclusa no fluxo de pagamento. As tarifas financeiras (PIX, cartão) são de responsabilidade da instituição financeira parceira. Não há mensalidade fixa para começar. Quanto mais serviços, melhor o custo-benefício da plataforma.',
+      'A MECA cobra uma taxa de intermediação de serviço, já inclusa no fluxo de pagamento. As tarifas financeiras (PIX, cartão) são definidas e cobradas pela Asaas Gestão Financeira S.A. Não há mensalidade fixa para começar. Quanto mais serviços, melhor o custo-benefício da plataforma.',
   },
   {
     category: 'geral',

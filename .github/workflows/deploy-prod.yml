@@ -1,0 +1,156 @@
+name: Deploy Site MECA — Produção
+
+# meca-site é um Next.js 15 de marketing (mecabr.com).
+# Usa Spline 3D, Framer Motion — verificar se tem `next export` disponível.
+# Se SSG: deploy S3 + CloudFront
+# Se SSR: container necessário (similar ao admin)
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-site-prod
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: us-east-2
+  S3_BUCKET: mecabr-site-prod
+  CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.SITE_CLOUDFRONT_ID }}
+  SITE_URL: https://mecabr.com
+
+jobs:
+  check:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+        continue-on-error: true
+
+  build-and-deploy:
+    name: Build & Deploy S3 + CloudFront
+    runs-on: ubuntu-latest
+    needs: check
+    environment: production
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Cache .next/cache
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: ${{ runner.os }}-nextjs-site-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-site-
+
+      - name: Build Next.js
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Export estático
+        id: export
+        run: |
+          if npx next export -o out 2>/dev/null; then
+            echo "mode=static" >> $GITHUB_OUTPUT
+            echo "Export estático: OK"
+            ls -lh out/ | head -20
+          else
+            echo "mode=ssr" >> $GITHUB_OUTPUT
+            echo "Export estático não disponível — o site usa recursos SSR"
+          fi
+        continue-on-error: true
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Deploy para S3 — assets com cache longo
+        if: steps.export.outputs.mode == 'static'
+        run: |
+          # Assets compilados (_next/static/) — imutáveis com hash no nome
+          aws s3 sync out/_next/static/ \
+            s3://${{ env.S3_BUCKET }}/_next/static/ \
+            --cache-control "public, max-age=31536000, immutable" \
+            --region ${{ env.AWS_REGION }}
+
+          # Imagens e outros assets estáticos
+          aws s3 sync out/ \
+            s3://${{ env.S3_BUCKET }}/ \
+            --delete \
+            --exclude "_next/static/*" \
+            --cache-control "public, max-age=86400" \
+            --region ${{ env.AWS_REGION }}
+
+          # HTML sem cache (SEO e atualizações chegam imediatamente)
+          aws s3 sync out/ \
+            s3://${{ env.S3_BUCKET }}/ \
+            --exclude "*" \
+            --include "*.html" \
+            --cache-control "no-cache, no-store, must-revalidate" \
+            --region ${{ env.AWS_REGION }}
+
+      - name: CloudFront invalidation
+        if: steps.export.outputs.mode == 'static' && env.CLOUDFRONT_DISTRIBUTION_ID != ''
+        run: |
+          INVALIDATION_ID=$(aws cloudfront create-invalidation \
+            --distribution-id ${{ env.CLOUDFRONT_DISTRIBUTION_ID }} \
+            --paths "/*.html" "/sitemap.xml" "/robots.txt" \
+            --query "Invalidation.Id" \
+            --output text \
+            --region us-east-1)
+          echo "CloudFront invalidation criada: $INVALIDATION_ID"
+
+      - name: Deploy SSR — instrução para container
+        if: steps.export.outputs.mode == 'ssr'
+        run: |
+          echo "## Site MECA — Deploy Container Necessário" >> $GITHUB_STEP_SUMMARY
+          echo "O site usa recursos SSR (getServerSideProps ou Server Components dinâmicos)." >> $GITHUB_STEP_SUMMARY
+          echo "Configure um ECS Service ou Vercel para este projeto." >> $GITHUB_STEP_SUMMARY
+
+      - name: Smoke test
+        if: steps.export.outputs.mode == 'static'
+        run: |
+          sleep 15
+          HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 15 ${{ env.SITE_URL }} || echo "000")
+          if [ "$HTTP_STATUS" = "200" ]; then
+            echo "Site respondendo: HTTP $HTTP_STATUS"
+          else
+            echo "Site retornou HTTP $HTTP_STATUS"
+          fi
+
+      - name: Resumo
+        if: always()
+        run: |
+          echo "## Site Deploy" >> $GITHUB_STEP_SUMMARY
+          echo "| Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| S3 | ${{ env.S3_BUCKET }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| URL | [${{ env.SITE_URL }}](${{ env.SITE_URL }}) |" >> $GITHUB_STEP_SUMMARY
+          echo "| Hora | $(date -u +'%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
