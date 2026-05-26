@@ -227,7 +227,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-5">
             <a
-              href="https://www.asaas.com"
+              href="https://baas.asaas.com/selos/Servicos_financeiros_Asaas-Reduzida-Negativo-Branco.svg?id=2a6ee772-f63f-424d-9d0e-1a3811b0f64c"
               target="_blank"
               rel="noopener noreferrer"
               className="opacity-50 hover:opacity-90 transition-opacity"
