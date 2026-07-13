@@ -1,261 +1,194 @@
 'use client';
 
+import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle, Clock, Mail, Phone, Shield, Zap } from 'lucide-react';
+import { ArrowRight, Wrench } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
 
 export default function CtaSection() {
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Simulate form submission
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 3000);
-  };
-
-  const benefits = [
-    "Conecte-se com oficinas próximas a você",
-    "Agende serviços com facilidade e rapidez",
-    "Acompanhe o status do seu serviço em tempo real",
-    "Tenha todo histórico do seu veículo em um só lugar"
-  ];
-  
-  // New feature highlights to replace stats
-  const features = [
-    {
-      icon: <Clock className="w-6 h-6 text-meca-verde" />,
-      label: "Agendamento Rápido",
-    },
-    {
-      icon: <Shield className="w-6 h-6 text-meca-verde" />,
-      label: "Oficinas Confiáveis",
-    },
-    {
-      icon: <Zap className="w-6 h-6 text-meca-verde" />,
-      label: "Serviço Eficiente",
-    },
-    {
-      icon: <CheckCircle className="w-6 h-6 text-meca-verde" />,
-      label: "Preços Transparentes",
-    }
-  ];
-
   return (
-    <section className="py-24 bg-gradient-to-br from-meca-marinho via-gray-900 to-meca-marinho relative overflow-hidden">
-      {/* Background Effects */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-meca-verde rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-0 w-72 h-72 bg-meca-verde rounded-full blur-3xl"></div>
+    <section className="py-32 relative overflow-hidden bg-[#080808]">
+
+      {/* Background glow */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/2 left-1/3 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-meca-verde/8 blur-[140px]" />
+        <div className="absolute top-1/2 right-1/3 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-meca-ai/6 blur-[120px]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Left Side - CTA Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-20"
+        >
+          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+            Pronto para{' '}
+            <span className="gradient-text-verde">começar?</span>
+          </h2>
+          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+            Escolha seu perfil e baixe o app agora.
+          </p>
+        </motion.div>
+
+        {/* Dual CTA Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+          {/* Card — App Cliente */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="text-white space-y-8"
+            transition={{ duration: 0.7 }}
+            className="relative rounded-3xl p-8 lg:p-10 overflow-hidden group"
+            style={{
+              background: 'rgba(65,177,115,0.06)',
+              border: '1px solid rgba(65,177,115,0.2)',
+            }}
           >
-            <div className="space-y-6">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                viewport={{ once: true }}
-                className="inline-flex items-center px-4 py-2 bg-meca-verde/20 border border-meca-verde/30 rounded-full text-meca-verde text-sm font-medium"
-              >
-                🚀 Revolucionando a manutenção automotiva
-              </motion.div>
-              
-              <h2 className="text-4xl lg:text-6xl font-bold leading-tight">
-                Simplifique o cuidado com seu{' '}
-                <span className="text-meca-verde">veículo</span>
-              </h2>
-              
-              <p className="text-xl text-gray-300 leading-relaxed">
-                A maneira mais moderna e eficiente de gerenciar 
-                a manutenção do seu carro e conectar-se com oficinas de confiança.
+            {/* Background glow on hover */}
+            <div className="absolute inset-0 bg-meca-verde/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl" />
+
+            <div className="relative z-10">
+              {/* Tag */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6 text-meca-verde"
+                style={{ background: 'rgba(65,177,115,0.15)', border: '1px solid rgba(65,177,115,0.3)' }}>
+                <span className="text-base">🚗</span>
+                Sou Motorista
+              </div>
+
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                App Cliente MECA
+              </h3>
+              <p className="text-white/50 mb-8 leading-relaxed">
+                Agende serviços, converse com a MIA, pague pelo app e acompanhe
+                tudo do seu veículo em um único lugar.
               </p>
-            </div>
 
-            {/* Benefits List */}
-            <div className="space-y-4">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  viewport={{ once: true }}
-                  className="flex items-center space-x-3"
-                >
-                  <CheckCircle className="w-5 h-5 text-meca-verde flex-shrink-0" />
-                  <span className="text-gray-300">{benefit}</span>
-                </motion.div>
-              ))}
-            </div>
+              {/* Features */}
+              <ul className="space-y-3 mb-8">
+                {['MIA — IA para diagnóstico', 'Agendamento em 2 minutos', 'Pagamento seguro pelo app', 'Histórico completo do veículo'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-white/70 text-sm">
+                    <div className="w-5 h-5 rounded-full bg-meca-verde/20 flex items-center justify-center flex-shrink-0">
+                      <div className="w-2 h-2 rounded-full bg-meca-verde" />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
 
-            {/* Download Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              viewport={{ once: true }}
-              className="flex flex-col sm:flex-row gap-4"
-            >
-              <div className="flex flex-col sm:flex-row gap-4">
-                <motion.a 
+              {/* Download buttons */}
+              <div className="flex flex-row gap-3">
+                <motion.a
                   href="https://apps.apple.com/us/app/meca/id6743087361"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[140px] h-[46px] relative"
                 >
-                  <Image
-                    src={require('@/assets/buttonAppleStore.png')}
-                    alt="Baixar na App Store"
-                    width={160}
-                    height={53}
-                    className="w-full h-auto object-contain"
-                  />
+                  <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
                 </motion.a>
-                
-                <motion.a 
+                <motion.a
                   href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="transition-all duration-300 w-[160px] h-[53px] flex items-center"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[140px] h-[46px] relative"
                 >
-                  <Image
-                    src={require('@/assets/buttonGooglePlay.png')}
-                    alt="Baixar no Google Play"
-                    width={160}
-                    height={53}
-                    className="h-auto"
-                  />
+                  <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
                 </motion.a>
               </div>
-              
-             
-            </motion.div>
+            </div>
           </motion.div>
 
-          {/* Right Side - Contact Form */}
+          {/* Card — App Oficina */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
             viewport={{ once: true }}
-            className="bg-white rounded-3xl p-8 shadow-2xl"
+            transition={{ duration: 0.7 }}
+            className="relative rounded-3xl p-8 lg:p-10 overflow-hidden group"
+            style={{
+              background: 'rgba(74,108,247,0.06)',
+              border: '1px solid rgba(74,108,247,0.2)',
+            }}
           >
-            <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Fique por dentro das novidades
-              </h3>
-              <p className="text-gray-600">
-                Saiba em primeira mão quando o app estiver disponível para download
-              </p>
-            </div>
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"
+              style={{ background: 'rgba(74,108,247,0.05)' }} />
 
-            {!isSubmitted ? (
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Seu melhor e-mail
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="seuemail@exemplo.com"
-                      className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-meca-verde focus:border-transparent transition-all duration-200"
-                    />
-                  </div>
-                </div>
-
-                <motion.a
-                  href="mailto:contato@meca.app?subject=Quero%20ficar%20por%20dentro%20das%20novidades"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-meca-verde to-meca-marinho text-white py-4 rounded-xl font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2"
-                >
-                  <span>Quero ficar por dentro</span>
-                  <ArrowRight className="w-5 h-5" />
-                </motion.a>
-
-                <p className="text-xs text-gray-500 text-center">
-                  Ao se inscrever, você concorda com nossa política de privacidade. 
-                  Você pode cancelar a qualquer momento.
-                </p>
+            <div className="relative z-10">
+              {/* Tag */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-6"
+                style={{ background: 'rgba(74,108,247,0.15)', border: '1px solid rgba(74,108,247,0.3)', color: '#8b9cf4' }}>
+                <Wrench className="w-3.5 h-3.5" />
+                Tenho uma Oficina
               </div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                className="text-center py-8"
-              >
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <CheckCircle className="w-8 h-8 text-green-600" />
-                </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                  Obrigado! 🎉
-                </h3>
-                <p className="text-gray-600">
-                  Você foi inscrito com sucesso. Avisaremos quando o app MECA estiver disponível.
-                </p>
-              </motion.div>
-            )}
 
-            {/* Contact Info */}
-            <div className="mt-8 pt-6 border-t border-gray-100">
-              <p className="text-sm text-gray-600 text-center mb-4">Ou entre em contato diretamente:</p>
-              <div className="flex justify-center space-x-6 text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4" />
-                  <span>(11) 3064-4243</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4" />
-                  <span>contato@mecabr.com </span>
-                </div>
+              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                App Oficina MECA
+              </h3>
+              <p className="text-white/50 mb-8 leading-relaxed">
+                Atraia novos clientes, gerencie sua agenda, controle financeiro
+                e construa uma reputação sólida na plataforma.
+              </p>
+
+              {/* Features */}
+              <ul className="space-y-3 mb-8">
+                {['Mais clientes da região', 'Gestão de agenda integrada', 'Chat direto com motoristas', 'Financeiro e repasses no app'].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-white/70 text-sm">
+                    <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                      style={{ background: 'rgba(74,108,247,0.2)' }}>
+                      <div className="w-2 h-2 rounded-full" style={{ background: '#8b9cf4' }} />
+                    </div>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Download buttons */}
+              <div className="flex flex-row gap-3">
+                <motion.a
+                  href="https://apps.apple.com/app/meca-oficina/id6476768852"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[140px] h-[46px] relative"
+                >
+                  <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
+                </motion.a>
+                <motion.a
+                  href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[140px] h-[46px] relative"
+                >
+                  <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
+                </motion.a>
               </div>
             </div>
           </motion.div>
         </div>
 
-        {/* Feature Highlights (replacing numerical stats) */}
+        {/* Bottom tagline */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center text-white"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-center mt-16"
         >
-          {features.map((feature, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <div className="flex justify-center mb-3">
-                {feature.icon}
-              </div>
-              <div className="text-gray-300 font-medium">{feature.label}</div>
-            </motion.div>
-          ))}
+          <p className="text-white/30 text-sm">
+            Gratuito para download. Disponível para iOS e Android.
+          </p>
+          <p className="text-meca-verde font-semibold mt-2">Quem vai de MECA, vai além!</p>
         </motion.div>
       </div>
     </section>

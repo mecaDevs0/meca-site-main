@@ -1,7 +1,8 @@
 'use client';
 
+
+
 import mecaLogoBranco from '@/assets/meca-logo-branco.png';
-import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
@@ -15,9 +16,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-      
-      // Track active section for nav highlighting
+      setIsScrolled(window.scrollY > 40);
       const sections = document.querySelectorAll('section[id]');
       sections.forEach(section => {
         const sectionTop = section.offsetTop - 100;
@@ -27,89 +26,77 @@ export default function Navbar() {
         }
       });
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Smooth scroll to section
   const scrollToSection = (e, sectionId) => {
     e.preventDefault();
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start',
-      });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
       setIsMenuOpen(false);
     }
   };
 
   const navLinks = [
-    { name: 'Para Motoristas', href: '#motoristas', sectionId: 'motoristas' },
-    { name: 'Para Oficinas', href: '#oficinas', sectionId: 'oficinas' },
+    { name: 'App Cliente', href: '#motoristas', sectionId: 'motoristas' },
+    { name: 'App Oficina', href: '#oficinas', sectionId: 'oficinas' },
     { name: 'Como Funciona', href: '#como-funciona', sectionId: 'como-funciona' },
-    { name: 'Sobre', href: '#sobre', sectionId: 'sobre' }
+    { name: 'Sobre', href: '#sobre', sectionId: 'sobre' },
   ];
 
   return (
     <>
       <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isMenuOpen
-            ? 'bg-meca-marinho shadow-xl border-b border-meca-marinho'
-            : isScrolled 
-              ? 'bg-white/95 backdrop-blur-md shadow-lg border-b border-gray-100' 
-              : 'bg-meca-verde/70 backdrop-blur-sm'
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: 'easeOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+          isScrolled
+            ? 'bg-[#080808]/90 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl'
+            : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
-            
+
             {/* Logo */}
-            <Link href="/" className="flex items-center space-x-2 group">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                className="flex items-center space-x-2"
-              >
-                <div className="w-32 h-32 relative">
-                  <Image 
-                    src={isScrolled ? mecaLogoVerde : mecaLogoBranco}
-                    alt="MECA Logo" 
-                    fill 
-                    className="object-contain" 
-                  />
-                </div>
-             
+            <Link href="/" className="flex items-center group">
+              <motion.div whileHover={{ scale: 1.04 }} className="w-28 h-28 relative">
+                <Image
+                  src={mecaLogoBranco}
+                  alt="MECA Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navLinks.map((link, index) => (
+            {/* Desktop Nav */}
+            <div className="hidden lg:flex items-center space-x-1">
+              {navLinks.map((link, i) => (
                 <motion.div
                   key={link.name}
-                  initial={{ opacity: 0, y: -20 }}
+                  initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
                 >
                   <Link
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.sectionId)}
-                    className={`font-medium transition-colors hover:text-meca-verde relative px-2 py-1 ${
-                      activeSection === link.sectionId 
-                        ? isScrolled ? 'text-meca-verde' : 'text-white font-bold' 
-                        : isScrolled ? 'text-gray-700' : 'text-white/90'
+                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
+                      activeSection === link.sectionId
+                        ? 'text-meca-verde bg-meca-verde/10'
+                        : 'text-white/70 hover:text-white hover:bg-white/5'
                     }`}
                   >
                     {link.name}
                     {activeSection === link.sectionId && (
-                      <motion.span 
-                        layoutId="activeSection"
-                        className={`absolute bottom-0 left-0 h-0.5 w-full ${isScrolled ? 'bg-meca-verde' : 'bg-white'}`}
+                      <motion.span
+                        layoutId="activeNav"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-meca-verde"
                       />
                     )}
                   </Link>
@@ -117,20 +104,44 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
+            {/* Desktop CTA — App buttons with icons */}
+            <div className="hidden lg:flex items-center gap-3">
+              <motion.a
+                href="#motoristas"
+                onClick={(e) => scrollToSection(e, 'motoristas')}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-meca-verde/10 border border-meca-verde/30 hover:bg-meca-verde/20 hover:border-meca-verde/50 transition-all duration-200"
+              >
+                <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
+                  <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
+                </div>
+                <span className="text-sm font-semibold text-meca-verde">App Cliente</span>
+              </motion.a>
+              <motion.a
+                href="#oficinas"
+                onClick={(e) => scrollToSection(e, 'oficinas')}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
+                className="flex items-center gap-2.5 px-4 py-2 rounded-xl border border-white/10 hover:border-white/25 hover:bg-white/5 transition-all duration-200"
+                style={{ background: 'rgba(74,108,247,0.08)', borderColor: 'rgba(74,108,247,0.25)' }}
+              >
+                <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
+                  <img src="/app-icon-oficina.png" alt="App Oficina" className="w-full h-full object-cover rounded-md" />
+                </div>
+                <span className="text-sm font-semibold" style={{ color: '#8b9cf4' }}>App Oficina</span>
+              </motion.a>
+            </div>
+
+            {/* Mobile Hamburger */}
             <motion.button
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6 }}
-              className="lg:hidden p-2"
+              className="lg:hidden p-2 text-white"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Menu"
             >
-              {isMenuOpen ? (
-                <X className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
-              ) : (
-                <Menu className={`w-6 h-6 ${isScrolled ? 'text-gray-900' : 'text-white'}`} />
-              )}
+              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </motion.button>
           </div>
         </div>
@@ -139,51 +150,45 @@ export default function Navbar() {
         <AnimatePresence>
           {isMenuOpen && (
             <>
-              {/* Backdrop */}
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40"
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
                 onClick={() => setIsMenuOpen(false)}
               />
-              
-              {/* Menu Panel */}
               <motion.div
-                initial={{ x: 400, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                exit={{ x: 400, opacity: 0 }}
-                transition={{ type: 'tween', duration: 0.35, ease: [0.4, 0.0, 0.2, 1] }}
-                className="fixed top-0 right-0 h-full w-80 max-w-sm bg-meca-marinho shadow-2xl z-50 flex flex-col rounded-l-3xl border-l-2 border-meca-verde/30"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ type: 'tween', duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+                className="fixed top-0 right-0 h-full w-80 max-w-sm bg-[#0e0e0e] border-l border-white/[0.08] z-50 flex flex-col"
               >
-                <div className="p-6 flex-1 flex flex-col">
-                  {/* Close Button */}
-                  <div className="flex justify-end mb-8">
-                    <button
-                      onClick={() => setIsMenuOpen(false)}
-                      className="p-2 hover:bg-meca-verde/20 rounded-lg transition-colors"
-                      aria-label="Fechar menu"
-                    >
-                      <X className="w-7 h-7 text-white" />
+                <div className="p-6 flex flex-col h-full">
+                  <div className="flex justify-between items-center mb-10">
+                    <div className="w-24 h-24 relative">
+                      <Image src={mecaLogoBranco} alt="MECA" fill className="object-contain" />
+                    </div>
+                    <button onClick={() => setIsMenuOpen(false)} className="p-2 text-white/60 hover:text-white">
+                      <X className="w-6 h-6" />
                     </button>
                   </div>
 
-                  {/* Mobile Navigation Links */}
-                  <nav className="flex-1 flex flex-col justify-center space-y-6 mt-8">
-                    {navLinks.map((link, index) => (
+                  <nav className="flex flex-col gap-2">
+                    {navLinks.map((link, i) => (
                       <motion.div
                         key={link.name}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.3, delay: index * 0.1 }}
+                        transition={{ delay: i * 0.07 }}
                       >
                         <Link
                           href={link.href}
                           onClick={(e) => scrollToSection(e, link.sectionId)}
-                          className={`block py-4 text-2xl font-semibold rounded-xl text-center transition-all duration-200 ${
-                            activeSection === link.sectionId 
-                              ? 'bg-meca-verde text-white shadow-lg' 
-                              : 'text-white hover:bg-meca-verde/20 hover:text-meca-verde'
+                          className={`block px-4 py-3 rounded-xl text-lg font-medium transition-all ${
+                            activeSection === link.sectionId
+                              ? 'bg-meca-verde text-[#080808]'
+                              : 'text-white/80 hover:bg-white/5 hover:text-white'
                           }`}
                         >
                           {link.name}
@@ -192,24 +197,35 @@ export default function Navbar() {
                     ))}
                   </nav>
 
-                  {/* Contact Info */}
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3, delay: 0.5 }}
-                    className="mt-8 pt-8 border-t border-meca-verde/30 text-center"
-                  >
-                    <p className="text-sm text-white/80 mb-2">Dúvidas? Fale conosco:</p>
-                    <p className="text-sm font-medium text-meca-verde">contato@mecabr.com </p>
-                  </motion.div>
+                  <div className="mt-auto pt-8 border-t border-white/[0.08] space-y-3">
+                    <a
+                      href="#motoristas"
+                      onClick={(e) => scrollToSection(e, 'motoristas')}
+                      className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold bg-meca-verde/10 border border-meca-verde/30 text-meca-verde rounded-xl"
+                    >
+                      <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
+                      </div>
+                      App Cliente
+                    </a>
+                    <a
+                      href="#oficinas"
+                      onClick={(e) => scrollToSection(e, 'oficinas')}
+                      className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold rounded-xl"
+                      style={{ background: 'rgba(74,108,247,0.1)', border: '1px solid rgba(74,108,247,0.25)', color: '#8b9cf4' }}
+                    >
+                      <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="/app-icon-oficina.png" alt="App Oficina" className="w-full h-full object-cover rounded-md" />
+                      </div>
+                      App Oficina
+                    </a>
+                  </div>
                 </div>
               </motion.div>
             </>
           )}
         </AnimatePresence>
       </motion.nav>
-
-      {/* Spacer to prevent content from being hidden behind fixed navbar */}
     </>
   );
 }
