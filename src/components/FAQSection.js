@@ -69,7 +69,7 @@ export default function FAQSection() {
   const filtered = activeCategory === 'todos' ? faqs : faqs.filter((f) => f.category === activeCategory);
 
   return (
-    <section className="py-32 bg-[#080808] relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -86,14 +86,14 @@ export default function FAQSection() {
           transition={{ duration: 0.7 }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.08] text-white/60 text-sm font-medium mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium mb-6" style={{ color: 'var(--s-text-muted)' }}>
             <HelpCircle className="w-4 h-4" />
             Perguntas Frequentes
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             Tire suas <span className="gradient-text-verde">dúvidas</span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             Perguntas sobre o App Cliente, App Oficina e a plataforma MECA.
           </p>
         </motion.div>
@@ -110,11 +110,12 @@ export default function FAQSection() {
             <button
               key={c.key}
               onClick={() => { setActiveCategory(c.key); setOpenIndex(-1); }}
-              className={`px-5 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                activeCategory === c.key
-                  ? 'bg-meca-verde text-[#080808]'
-                  : 'glass border border-white/[0.08] text-white/60 hover:text-white hover:border-white/20'
-              }`}
+              className="px-5 py-2 rounded-full text-sm font-medium transition-all duration-200"
+              style={{
+                background: activeCategory === c.key ? '#41b173' : 'var(--s-glass-bg)',
+                color: activeCategory === c.key ? '#fff' : 'var(--s-text-muted)',
+                border: activeCategory === c.key ? '1px solid #41b173' : '1px solid var(--s-border)',
+              }}
             >
               {c.label}
             </button>
@@ -131,21 +132,25 @@ export default function FAQSection() {
               transition={{ duration: 0.4, delay: index * 0.06 }}
               className="rounded-2xl overflow-hidden"
               style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: openIndex === index ? '1px solid rgba(65,177,115,0.3)' : '1px solid rgba(255,255,255,0.06)',
+                background: 'var(--s-glass-bg)',
+                border: openIndex === index ? '1px solid rgba(65,177,115,0.3)' : '1px solid var(--s-border-light)',
                 transition: 'border-color 0.3s',
+                boxShadow: 'var(--s-card-shadow)',
               }}
             >
               <button
                 onClick={() => setOpenIndex(openIndex === index ? -1 : index)}
-                className="w-full px-7 py-5 text-left flex justify-between items-center gap-4 hover:bg-white/[0.02] transition-colors"
+                className="w-full px-7 py-5 text-left flex justify-between items-center gap-4 transition-colors"
+                style={{ background: 'transparent' }}
+                onMouseEnter={e => e.currentTarget.style.background = 'var(--s-glass-hover)'}
+                onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
               >
-                <span className="text-white font-medium text-base">{faq.question}</span>
+                <span className="font-medium text-base" style={{ color: 'var(--s-text)' }}>{faq.question}</span>
                 <div className="flex-shrink-0 w-7 h-7 rounded-lg flex items-center justify-center transition-colors"
-                  style={{ background: openIndex === index ? 'rgba(65,177,115,0.2)' : 'rgba(255,255,255,0.05)' }}>
+                  style={{ background: openIndex === index ? 'rgba(65,177,115,0.2)' : 'var(--s-glass-hover)' }}>
                   {openIndex === index
                     ? <Minus className="w-4 h-4 text-meca-verde" />
-                    : <Plus className="w-4 h-4 text-white/40" />}
+                    : <Plus className="w-4 h-4" style={{ color: 'var(--s-text-muted)' }} />}
                 </div>
               </button>
 
@@ -159,7 +164,7 @@ export default function FAQSection() {
                     className="overflow-hidden"
                   >
                     <div className="px-7 pb-6">
-                      <p className="text-white/60 leading-relaxed text-sm">{faq.answer}</p>
+                      <p className="leading-relaxed text-sm" style={{ color: 'var(--s-text-secondary)' }}>{faq.answer}</p>
                     </div>
                   </motion.div>
                 )}
@@ -174,10 +179,10 @@ export default function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.3 }}
-          className="mt-16 text-center glass rounded-3xl p-8 border border-white/[0.06]"
+          className="mt-16 text-center glass rounded-3xl p-8"
         >
-          <h3 className="text-xl font-bold text-white mb-3">Ainda tem dúvidas?</h3>
-          <p className="text-white/50 text-sm mb-6">Nossa equipe está pronta para ajudar.</p>
+          <h3 className="text-xl font-bold mb-3" style={{ color: 'var(--s-text)' }}>Ainda tem dúvidas?</h3>
+          <p className="text-sm mb-6" style={{ color: 'var(--s-text-secondary)' }}>Nossa equipe está pronta para ajudar.</p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <motion.a
               href="https://wa.me/551130644243?text=Ola,%20vim%20através%20do%20site%20da%20meca%20e%20estou%20com%20duvidas"
@@ -185,7 +190,7 @@ export default function FAQSection() {
               rel="noopener noreferrer"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="px-6 py-3 rounded-xl bg-meca-verde text-[#080808] font-semibold text-sm"
+              className="px-6 py-3 rounded-xl bg-meca-verde text-white font-semibold text-sm"
             >
               Falar no WhatsApp
             </motion.a>
@@ -193,7 +198,13 @@ export default function FAQSection() {
               href="mailto:contato@mecabr.com"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
-              className="px-6 py-3 rounded-xl border border-white/15 text-white/80 font-semibold text-sm hover:border-white/30 transition-colors"
+              className="px-6 py-3 rounded-xl font-semibold text-sm transition-colors"
+              style={{
+                border: '1px solid var(--s-border)',
+                color: 'var(--s-text-80)',
+              }}
+              onMouseEnter={e => e.currentTarget.style.borderColor = 'var(--s-text-muted)'}
+              onMouseLeave={e => e.currentTarget.style.borderColor = 'var(--s-border)'}
             >
               Enviar e-mail
             </motion.a>

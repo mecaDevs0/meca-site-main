@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   safelist: [
     'bg-meca-verde', 'bg-meca-marinho', 'text-meca-verde', 'text-meca-marinho',
     'border-meca-verde', 'border-meca-marinho',

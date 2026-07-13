@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen overflow-x-hidden bg-[#080808]">
+      <main className="w-full min-h-screen overflow-x-hidden" style={{ background: 'var(--s-bg)' }}>
         <HeroSection />
         <section id="mia">
           <MIASection />

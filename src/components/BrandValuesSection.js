@@ -56,7 +56,7 @@ const values = [
 
 export default function BrandValuesSection() {
   return (
-    <section id="sobre" className="py-32 bg-[#080808] relative overflow-hidden">
+    <section id="sobre" className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -73,14 +73,14 @@ export default function BrandValuesSection() {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-white/60 text-sm font-medium mb-6 border border-white/[0.08]">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass text-sm font-medium mb-6" style={{ color: 'var(--s-text-muted)' }}>
             Por que escolher o MECA?
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             Tudo que você{' '}
             <span className="gradient-text-verde">merece</span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             Construímos o MECA com um único objetivo: ser a plataforma mais confiável
             do mercado automotivo brasileiro.
           </p>
@@ -103,6 +103,7 @@ export default function BrandValuesSection() {
                   background: v.bg,
                   border: `1px solid ${v.border}`,
                   backdropFilter: 'blur(12px)',
+                  boxShadow: 'var(--s-card-shadow)',
                 }}
               >
                 {/* Icon */}
@@ -113,8 +114,8 @@ export default function BrandValuesSection() {
                   <Icon className="w-7 h-7" style={{ color: v.color }} />
                 </div>
 
-                <h3 className="text-white font-bold text-lg mb-3">{v.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{v.desc}</p>
+                <h3 className="font-bold text-lg mb-3" style={{ color: 'var(--s-text)' }}>{v.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--s-text-secondary)' }}>{v.desc}</p>
 
                 {/* Bottom accent line */}
                 <div

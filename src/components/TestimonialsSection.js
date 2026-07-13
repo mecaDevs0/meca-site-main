@@ -80,7 +80,7 @@ const testimonials = [
 
 export default function TestimonialsSection() {
   return (
-    <section className="py-32 bg-[#080808] relative overflow-hidden">
+    <section className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -98,14 +98,14 @@ export default function TestimonialsSection() {
           transition={{ duration: 0.7 }}
           className="text-center mb-20"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-yellow-500/20 text-yellow-400 text-sm font-medium mb-6">
-            <Star className="w-4 h-4 fill-yellow-400" />
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-yellow-500/20 text-yellow-500 text-sm font-medium mb-6">
+            <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
             Depoimentos Reais
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             Quem usa, <span className="gradient-text-verde">recomenda</span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             Motoristas e oficinas que já transformaram sua experiência automotiva com o MECA.
           </p>
         </motion.div>
@@ -122,61 +122,59 @@ export default function TestimonialsSection() {
             <span className="text-[#8b9cf4] text-sm font-medium">Parceiros — App Oficina</span>
           </div>
 
-          {/* Testimonial cards — interleaved */}
-          {[0, 1, 2, 3, 4, 5].map((i) => {
-            const t = testimonials[i];
-            return (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.07 }}
-                whileHover={{ y: -4 }}
-                className="rounded-2xl p-7 transition-all duration-300"
-                style={{
-                  background: t.bg,
-                  border: `1px solid ${t.border}`,
-                  backdropFilter: 'blur(12px)',
-                }}
-              >
-                {/* Quote icon */}
-                <Quote className="w-7 h-7 mb-4" style={{ color: t.accent, opacity: 0.6 }} />
+          {/* Testimonial cards */}
+          {testimonials.map((t, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.07 }}
+              whileHover={{ y: -4 }}
+              className="rounded-2xl p-7 transition-all duration-300"
+              style={{
+                background: t.bg,
+                border: `1px solid ${t.border}`,
+                backdropFilter: 'blur(12px)',
+                boxShadow: 'var(--s-card-shadow)',
+              }}
+            >
+              {/* Quote icon */}
+              <Quote className="w-7 h-7 mb-4" style={{ color: t.accent, opacity: 0.6 }} />
 
-                {/* Content */}
-                <p className="text-white/80 text-base leading-relaxed mb-6">
-                  "{t.content}"
-                </p>
+              {/* Content */}
+              <p className="text-base leading-relaxed mb-6" style={{ color: 'var(--s-text-80)' }}>
+                &ldquo;{t.content}&rdquo;
+              </p>
 
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-5">
-                  {[...Array(t.rating)].map((_, si) => (
-                    <Star key={si} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
-                  ))}
+              {/* Stars */}
+              <div className="flex gap-0.5 mb-5">
+                {[...Array(t.rating)].map((_, si) => (
+                  <Star key={si} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
+                ))}
+              </div>
+
+              {/* Author */}
+              <div className="flex items-center gap-4">
+                <div
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-xl"
+                  style={{ background: `${t.accent}20` }}
+                >
+                  {t.avatar}
                 </div>
-
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <div
-                    className="w-11 h-11 rounded-full flex items-center justify-center text-xl"
-                    style={{ background: `${t.accent}20` }}
-                  >
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="text-white font-semibold text-sm">{t.name}</div>
-                    <div className="text-white/40 text-xs">{t.role}</div>
-                  </div>
-                  <div
-                    className="ml-auto text-xs font-medium px-3 py-1 rounded-full"
-                    style={{ background: `${t.accent}15`, color: t.accent, border: `1px solid ${t.accent}30` }}
-                  >
-                    {t.tag}
-                  </div>
+                <div>
+                  <div className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>{t.name}</div>
+                  <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>{t.role}</div>
                 </div>
-              </motion.div>
-            );
-          })}
+                <div
+                  className="ml-auto text-xs font-medium px-3 py-1 rounded-full"
+                  style={{ background: `${t.accent}15`, color: t.accent, border: `1px solid ${t.accent}30` }}
+                >
+                  {t.tag}
+                </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
 
         {/* Ratings summary */}
@@ -194,16 +192,16 @@ export default function TestimonialsSection() {
             <div
               key={i}
               className="flex items-center gap-4 px-8 py-4 rounded-2xl"
-              style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}
+              style={{ background: 'var(--s-glass-bg)', border: '1px solid var(--s-border-light)', boxShadow: 'var(--s-card-shadow)' }}
             >
-              <div className="text-3xl font-bold text-white">{s.rating}</div>
+              <div className="text-3xl font-bold" style={{ color: 'var(--s-text)' }}>{s.rating}</div>
               <div>
                 <div className="flex gap-0.5 mb-1">
                   {[...Array(s.stars)].map((_, si) => (
                     <Star key={si} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <div className="text-white/40 text-xs">{s.store}</div>
+                <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>{s.store}</div>
               </div>
             </div>
           ))}

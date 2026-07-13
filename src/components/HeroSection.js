@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { ArrowDown, Sparkles } from 'lucide-react';
-import Image from 'next/image';
 
 export default function HeroSection() {
   const scrollToSection = (sectionId) => {
@@ -11,7 +10,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden bg-[#080808]">
+    <section className="relative min-h-screen flex flex-col justify-center items-center overflow-hidden" style={{ background: 'var(--s-bg)' }}>
       {/* Background radial gradients */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-meca-verde/5 blur-[120px]" />
@@ -21,14 +20,15 @@ export default function HeroSection() {
 
       {/* Grid pattern overlay */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.025]"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(var(--s-grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--s-grid-line) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
+          opacity: 0.5,
         }}
       />
 
-      {/* Floating particles — fixed positions to avoid SSR hydration mismatch */}
+      {/* Floating particles */}
       {[
         { w: 3, h: 4, top: 20, left: 15, color: '#41b173' },
         { w: 4, h: 3, top: 35, left: 75, color: '#A855F7' },
@@ -82,7 +82,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-8xl font-bold text-white leading-[1.05] mb-6"
+          className="text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.05] mb-6"
+          style={{ color: 'var(--s-text)' }}
         >
           O Futuro da{' '}
           <span className="gradient-text-verde">Manutenção</span>
@@ -97,7 +98,8 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg sm:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed"
+          className="text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
+          style={{ color: 'var(--s-text-secondary)' }}
         >
           Conectamos motoristas às melhores oficinas com tecnologia de ponta.
           Um app para motoristas. Um app para oficinas. Uma plataforma que transforma o mercado automotivo.
@@ -133,7 +135,19 @@ export default function HeroSection() {
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
             onClick={() => scrollToSection('motoristas')}
-            className="px-8 py-4 rounded-2xl text-white font-semibold text-base border border-white/15 hover:border-meca-verde/50 hover:bg-meca-verde/8 transition-all duration-300"
+            className="px-8 py-4 rounded-2xl font-semibold text-base transition-all duration-300"
+            style={{
+              color: 'var(--s-text)',
+              border: '1px solid var(--s-border)',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'rgba(65,177,115,0.5)';
+              e.currentTarget.style.background = 'rgba(65,177,115,0.08)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--s-border)';
+              e.currentTarget.style.background = 'transparent';
+            }}
           >
             Conhecer os Apps
           </motion.button>
@@ -151,20 +165,20 @@ export default function HeroSection() {
               <span className="text-xl">🚗</span>
             </div>
             <div className="text-left">
-              <div className="text-white font-semibold text-sm">Para Motoristas</div>
-              <div className="text-white/40 text-xs">Agende, pague e acompanhe</div>
+              <div className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>Para Motoristas</div>
+              <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Agende, pague e acompanhe</div>
             </div>
           </div>
 
-          <div className="text-white/20 text-2xl font-thin hidden sm:block">+</div>
+          <div className="text-2xl font-thin hidden sm:block" style={{ color: 'var(--s-text-faint)' }}>+</div>
 
           <div className="glass rounded-2xl px-6 py-4 flex items-center gap-4 border border-meca-marinho/40">
             <div className="w-10 h-10 rounded-xl bg-meca-marinho/40 flex items-center justify-center">
               <span className="text-xl">🔧</span>
             </div>
             <div className="text-left">
-              <div className="text-white font-semibold text-sm">Para Oficinas</div>
-              <div className="text-white/40 text-xs">Gerencie e cresça seu negócio</div>
+              <div className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>Para Oficinas</div>
+              <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Gerencie e cresça seu negócio</div>
             </div>
           </div>
         </motion.div>
@@ -210,7 +224,10 @@ export default function HeroSection() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           onClick={() => scrollToSection('mia')}
-          className="text-white/30 hover:text-white/60 transition-colors"
+          style={{ color: 'var(--s-text-faint)' }}
+          className="transition-colors"
+          onMouseEnter={e => e.currentTarget.style.color = 'var(--s-text-muted)'}
+          onMouseLeave={e => e.currentTarget.style.color = 'var(--s-text-faint)'}
         >
           <ArrowDown className="w-6 h-6" />
         </motion.button>

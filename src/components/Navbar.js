@@ -1,10 +1,9 @@
 'use client';
 
-
-
 import mecaLogoBranco from '@/assets/meca-logo-branco.png';
+import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { Menu, Moon, Sun, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -13,6 +12,26 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+  }, []);
+
+  const toggleTheme = () => {
+    const html = document.documentElement;
+    html.classList.add('theme-transition');
+    if (isDark) {
+      html.classList.remove('dark');
+      localStorage.setItem('meca-theme', 'light');
+      setIsDark(false);
+    } else {
+      html.classList.add('dark');
+      localStorage.setItem('meca-theme', 'dark');
+      setIsDark(true);
+    }
+    setTimeout(() => html.classList.remove('theme-transition'), 400);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -52,11 +71,14 @@ export default function Navbar() {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: 'easeOut' }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled
-            ? 'bg-[#080808]/90 backdrop-blur-xl border-b border-white/[0.06] shadow-2xl'
-            : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
+        style={{
+          background: isScrolled ? 'var(--s-nav-scrolled)' : 'transparent',
+          backdropFilter: isScrolled ? 'blur(20px)' : 'none',
+          WebkitBackdropFilter: isScrolled ? 'blur(20px)' : 'none',
+          borderBottom: isScrolled ? '1px solid var(--s-border-light)' : 'none',
+          boxShadow: isScrolled ? 'var(--s-card-shadow)' : 'none',
+        }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 lg:h-20">
@@ -65,7 +87,7 @@ export default function Navbar() {
             <Link href="/" className="flex items-center group">
               <motion.div whileHover={{ scale: 1.04 }} className="w-28 h-28 relative">
                 <Image
-                  src={mecaLogoBranco}
+                  src={isDark ? mecaLogoBranco : mecaLogoVerde}
                   alt="MECA Logo"
                   fill
                   className="object-contain"
@@ -86,11 +108,23 @@ export default function Navbar() {
                   <Link
                     href={link.href}
                     onClick={(e) => scrollToSection(e, link.sectionId)}
-                    className={`relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 ${
-                      activeSection === link.sectionId
-                        ? 'text-meca-verde bg-meca-verde/10'
-                        : 'text-white/70 hover:text-white hover:bg-white/5'
-                    }`}
+                    className="relative px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200"
+                    style={{
+                      color: activeSection === link.sectionId ? '#41b173' : 'var(--s-text-muted)',
+                      background: activeSection === link.sectionId ? 'rgba(65,177,115,0.10)' : 'transparent',
+                    }}
+                    onMouseEnter={e => {
+                      if (activeSection !== link.sectionId) {
+                        e.currentTarget.style.color = 'var(--s-text)';
+                        e.currentTarget.style.background = 'var(--s-glass-hover)';
+                      }
+                    }}
+                    onMouseLeave={e => {
+                      if (activeSection !== link.sectionId) {
+                        e.currentTarget.style.color = 'var(--s-text-muted)';
+                        e.currentTarget.style.background = 'transparent';
+                      }
+                    }}
                   >
                     {link.name}
                     {activeSection === link.sectionId && (
@@ -104,8 +138,24 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Desktop CTA — App buttons with icons */}
+            {/* Desktop CTA + Theme toggle */}
             <div className="hidden lg:flex items-center gap-3">
+              {/* Theme toggle */}
+              <motion.button
+                whileHover={{ scale: 1.08 }}
+                whileTap={{ scale: 0.92 }}
+                onClick={toggleTheme}
+                className="w-9 h-9 rounded-xl flex items-center justify-center transition-all duration-200"
+                style={{
+                  background: 'var(--s-glass-bg)',
+                  border: '1px solid var(--s-border)',
+                  color: 'var(--s-text-muted)',
+                }}
+                aria-label={isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+              >
+                {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </motion.button>
+
               <motion.a
                 href="#motoristas"
                 onClick={(e) => scrollToSection(e, 'motoristas')}
@@ -116,33 +166,48 @@ export default function Navbar() {
                 <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
                   <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
                 </div>
-                <span className="text-sm font-semibold text-meca-verde">App Cliente</span>
+                <span className="text-sm font-semibold" style={{ color: 'var(--s-verde-text)' }}>App Cliente</span>
               </motion.a>
               <motion.a
                 href="#oficinas"
                 onClick={(e) => scrollToSection(e, 'oficinas')}
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2.5 px-4 py-2 rounded-xl border border-white/10 hover:border-white/25 hover:bg-white/5 transition-all duration-200"
-                style={{ background: 'rgba(74,108,247,0.08)', borderColor: 'rgba(74,108,247,0.25)' }}
+                className="flex items-center gap-2.5 px-4 py-2 rounded-xl transition-all duration-200"
+                style={{
+                  background: 'rgba(74,108,247,0.08)',
+                  border: '1px solid rgba(74,108,247,0.25)',
+                }}
               >
                 <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
                   <img src="/app-icon-oficina.png" alt="App Oficina" className="w-full h-full object-cover rounded-md" />
                 </div>
-                <span className="text-sm font-semibold" style={{ color: '#8b9cf4' }}>App Oficina</span>
+                <span className="text-sm font-semibold" style={{ color: 'var(--s-oficina-accent-text)' }}>App Oficina</span>
               </motion.a>
             </div>
 
-            {/* Mobile Hamburger */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              className="lg:hidden p-2 text-white"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Menu"
-            >
-              {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-            </motion.button>
+            {/* Mobile: Theme toggle + Hamburger */}
+            <div className="lg:hidden flex items-center gap-2">
+              <motion.button
+                whileTap={{ scale: 0.9 }}
+                onClick={toggleTheme}
+                className="p-2 rounded-lg"
+                style={{ color: 'var(--s-text-muted)' }}
+                aria-label={isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
+              >
+                {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              </motion.button>
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                className="p-2"
+                style={{ color: 'var(--s-text)' }}
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                aria-label="Menu"
+              >
+                {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              </motion.button>
+            </div>
           </div>
         </div>
 
@@ -154,7 +219,8 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40"
+                className="fixed inset-0 z-40"
+                style={{ background: 'var(--s-overlay)', backdropFilter: 'blur(4px)' }}
                 onClick={() => setIsMenuOpen(false)}
               />
               <motion.div
@@ -162,14 +228,22 @@ export default function Navbar() {
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
                 transition={{ type: 'tween', duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                className="fixed top-0 right-0 h-full w-80 max-w-sm bg-[#0e0e0e] border-l border-white/[0.08] z-50 flex flex-col"
+                className="fixed top-0 right-0 h-full w-80 max-w-sm z-50 flex flex-col"
+                style={{
+                  background: 'var(--s-mobile-menu-bg)',
+                  borderLeft: '1px solid var(--s-border)',
+                }}
               >
                 <div className="p-6 flex flex-col h-full">
                   <div className="flex justify-between items-center mb-10">
                     <div className="w-24 h-24 relative">
-                      <Image src={mecaLogoBranco} alt="MECA" fill className="object-contain" />
+                      <Image src={isDark ? mecaLogoBranco : mecaLogoVerde} alt="MECA" fill className="object-contain" />
                     </div>
-                    <button onClick={() => setIsMenuOpen(false)} className="p-2 text-white/60 hover:text-white">
+                    <button
+                      onClick={() => setIsMenuOpen(false)}
+                      className="p-2"
+                      style={{ color: 'var(--s-text-muted)' }}
+                    >
                       <X className="w-6 h-6" />
                     </button>
                   </div>
@@ -185,11 +259,11 @@ export default function Navbar() {
                         <Link
                           href={link.href}
                           onClick={(e) => scrollToSection(e, link.sectionId)}
-                          className={`block px-4 py-3 rounded-xl text-lg font-medium transition-all ${
-                            activeSection === link.sectionId
-                              ? 'bg-meca-verde text-[#080808]'
-                              : 'text-white/80 hover:bg-white/5 hover:text-white'
-                          }`}
+                          className="block px-4 py-3 rounded-xl text-lg font-medium transition-all"
+                          style={{
+                            background: activeSection === link.sectionId ? '#41b173' : 'transparent',
+                            color: activeSection === link.sectionId ? '#fff' : 'var(--s-text-80)',
+                          }}
                         >
                           {link.name}
                         </Link>
@@ -197,11 +271,12 @@ export default function Navbar() {
                     ))}
                   </nav>
 
-                  <div className="mt-auto pt-8 border-t border-white/[0.08] space-y-3">
+                  <div className="mt-auto pt-8 space-y-3" style={{ borderTop: '1px solid var(--s-border)' }}>
                     <a
                       href="#motoristas"
                       onClick={(e) => scrollToSection(e, 'motoristas')}
-                      className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold bg-meca-verde/10 border border-meca-verde/30 text-meca-verde rounded-xl"
+                      className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold bg-meca-verde/10 border border-meca-verde/30 rounded-xl"
+                      style={{ color: 'var(--s-verde-text)' }}
                     >
                       <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
                         <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
@@ -212,7 +287,7 @@ export default function Navbar() {
                       href="#oficinas"
                       onClick={(e) => scrollToSection(e, 'oficinas')}
                       className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold rounded-xl"
-                      style={{ background: 'rgba(74,108,247,0.1)', border: '1px solid rgba(74,108,247,0.25)', color: '#8b9cf4' }}
+                      style={{ background: 'rgba(74,108,247,0.1)', border: '1px solid rgba(74,108,247,0.25)', color: 'var(--s-oficina-accent-text)' }}
                     >
                       <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
                         <img src="/app-icon-oficina.png" alt="App Oficina" className="w-full h-full object-cover rounded-md" />

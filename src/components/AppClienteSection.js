@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Bot, Calendar, CreditCard, History, MapPin, Shield, Smartphone, Star } from 'lucide-react';
-import Image from 'next/image';
 
 const features = [
   {
@@ -57,7 +56,7 @@ const features = [
 
 export default function AppClienteSection() {
   return (
-    <section id="motoristas" className="py-32 bg-[#080808] relative overflow-hidden">
+    <section id="motoristas" className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -79,11 +78,11 @@ export default function AppClienteSection() {
             <Smartphone className="w-4 h-4" />
             Para Motoristas
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             App{' '}
             <span className="gradient-text-verde">Cliente MECA</span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             Tudo que você precisa para cuidar do seu carro — na palma da mão.
             Agende, pague, acompanhe e conte com a MIA.
           </p>
@@ -106,8 +105,8 @@ export default function AppClienteSection() {
                 <div className={`w-12 h-12 rounded-xl ${f.bg} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
                   <Icon className={`w-6 h-6 ${f.accent}`} />
                 </div>
-                <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--s-text)' }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--s-text-secondary)' }}>{f.desc}</p>
               </motion.div>
             );
           })}
@@ -124,10 +123,10 @@ export default function AppClienteSection() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             {/* Left */}
             <div className="text-center lg:text-left">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
+              <h3 className="text-2xl lg:text-3xl font-bold mb-3" style={{ color: 'var(--s-text)' }}>
                 Baixe agora e cuide do seu carro
               </h3>
-              <p className="text-white/50 mb-6">
+              <p className="mb-6" style={{ color: 'var(--s-text-secondary)' }}>
                 Disponível para iOS e Android. Gratuito.
               </p>
               <div className="flex flex-row gap-4 justify-center lg:justify-start">
@@ -156,23 +155,23 @@ export default function AppClienteSection() {
 
             {/* Right — Ratings */}
             <div className="flex gap-8">
-              <div className="text-center glass rounded-2xl px-6 py-4 border border-white/[0.06]">
-                <div className="text-3xl font-bold text-white mb-1">4.8</div>
+              <div className="text-center glass rounded-2xl px-6 py-4" style={{ border: '1px solid var(--s-border-light)' }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: 'var(--s-text)' }}>4.8</div>
                 <div className="flex justify-center gap-0.5 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <div className="text-white/40 text-xs">App Store</div>
+                <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>App Store</div>
               </div>
-              <div className="text-center glass rounded-2xl px-6 py-4 border border-white/[0.06]">
-                <div className="text-3xl font-bold text-white mb-1">4.9</div>
+              <div className="text-center glass rounded-2xl px-6 py-4" style={{ border: '1px solid var(--s-border-light)' }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: 'var(--s-text)' }}>4.9</div>
                 <div className="flex justify-center gap-0.5 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <div className="text-white/40 text-xs">Google Play</div>
+                <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Google Play</div>
               </div>
             </div>
           </div>

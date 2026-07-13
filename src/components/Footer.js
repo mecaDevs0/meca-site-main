@@ -1,10 +1,12 @@
 'use client';
 
 import mecaLogoBranco from '@/assets/meca-logo-branco.png';
+import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { motion } from 'framer-motion';
 import { ExternalLink, Instagram, Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
 const appColumns = [
   {
@@ -54,14 +56,24 @@ const contactInfo = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const [isDark, setIsDark] = useState(true);
+
+  useEffect(() => {
+    setIsDark(document.documentElement.classList.contains('dark'));
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <footer className="relative bg-[#060606]">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-meca-verde/30 to-transparent" />
+    <footer className="relative" style={{ background: 'var(--s-footer-bg)' }}>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px" style={{ background: `linear-gradient(90deg, transparent, rgba(65,177,115,0.3), transparent)` }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* ─── Main grid ─── */}
+        {/* Main grid */}
         <div className="pt-16 pb-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 gap-x-8">
 
           {/* Brand column */}
@@ -73,24 +85,24 @@ export default function Footer() {
             className="lg:col-span-4 flex flex-col"
           >
             <div className="w-24 h-24 relative mb-5">
-              <Image src={mecaLogoBranco} alt="MECA" fill className="object-contain" />
+              <Image src={isDark ? mecaLogoBranco : mecaLogoVerde} alt="MECA" fill className="object-contain" />
             </div>
-            <p className="text-white/45 text-sm leading-relaxed max-w-xs mb-6">
+            <p className="text-sm leading-relaxed max-w-xs mb-6" style={{ color: 'var(--s-text-muted)' }}>
               A plataforma que conecta motoristas e oficinas de forma moderna e eficiente.{' '}
-              <span className="text-meca-verde font-medium">Quem vai de MECA, vai além!</span>
+              <span className="font-medium" style={{ color: 'var(--s-verde-text)' }}>Quem vai de MECA, vai além!</span>
             </p>
 
             {/* Contact */}
             <div className="space-y-2.5 mb-6">
               {contactInfo.map(({ icon: Icon, text, href }, i) => {
                 const inner = (
-                  <div className="flex items-start gap-2.5 text-white/35 text-[13px] leading-snug">
-                    <Icon className="w-3.5 h-3.5 text-meca-verde/70 flex-shrink-0 mt-[3px]" />
+                  <div className="flex items-start gap-2.5 text-[13px] leading-snug" style={{ color: 'var(--s-text-muted)' }}>
+                    <Icon className="w-3.5 h-3.5 flex-shrink-0 mt-[3px]" style={{ color: 'rgba(65,177,115,0.7)' }} />
                     <span>{text}</span>
                   </div>
                 );
                 return href ? (
-                  <a key={i} href={href} className="block hover:text-white/60 transition-colors">{inner}</a>
+                  <a key={i} href={href} className="block transition-colors hover:opacity-80">{inner}</a>
                 ) : (
                   <div key={i}>{inner}</div>
                 );
@@ -103,13 +115,27 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.08 }}
-              className="inline-flex w-9 h-9 rounded-lg border border-white/8 items-center justify-center text-white/30 hover:text-white hover:border-meca-verde/40 hover:bg-meca-verde/8 transition-all duration-200"
+              className="inline-flex w-9 h-9 rounded-lg items-center justify-center transition-all duration-200"
+              style={{
+                border: '1px solid var(--s-border)',
+                color: 'var(--s-text-faint)',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.color = 'var(--s-text)';
+                e.currentTarget.style.borderColor = 'rgba(65,177,115,0.4)';
+                e.currentTarget.style.background = 'rgba(65,177,115,0.08)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.color = 'var(--s-text-faint)';
+                e.currentTarget.style.borderColor = 'var(--s-border)';
+                e.currentTarget.style.background = 'transparent';
+              }}
             >
               <Instagram className="w-4 h-4" />
             </motion.a>
           </motion.div>
 
-          {/* ─── App columns ─── */}
+          {/* App columns */}
           <div className="lg:col-span-5 grid grid-cols-2 gap-8">
             {appColumns.map((col, ci) => (
               <motion.div
@@ -121,10 +147,10 @@ export default function Footer() {
               >
                 {/* Header with app icon */}
                 <div className="flex items-center gap-2.5 mb-5">
-                  <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0 ring-1 ring-white/10">
+                  <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0" style={{ boxShadow: '0 0 0 1px var(--s-border)' }}>
                     <img src={col.icon} alt={col.title} className="w-full h-full object-cover" />
                   </div>
-                  <h3 className="text-white font-semibold text-sm">{col.title}</h3>
+                  <h3 className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>{col.title}</h3>
                 </div>
 
                 {/* Links */}
@@ -135,7 +161,10 @@ export default function Footer() {
                         href={link.href}
                         target={link.external ? '_blank' : undefined}
                         rel={link.external ? 'noopener noreferrer' : undefined}
-                        className="text-white/35 hover:text-white text-[13px] transition-colors flex items-center gap-1.5 group"
+                        className="text-[13px] transition-colors flex items-center gap-1.5 group"
+                        style={{ color: 'var(--s-text-muted)' }}
+                        onMouseEnter={e => e.currentTarget.style.color = 'var(--s-text)'}
+                        onMouseLeave={e => e.currentTarget.style.color = 'var(--s-text-muted)'}
                       >
                         {link.name}
                         {link.external && (
@@ -152,21 +181,45 @@ export default function Footer() {
                     href={col.stores.apple}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:border-white/25 bg-white/[0.03] hover:bg-white/[0.06] transition-all group w-fit"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-all group w-fit"
+                    style={{
+                      border: '1px solid var(--s-border)',
+                      background: 'var(--s-glass-bg)',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'var(--s-text-muted)';
+                      e.currentTarget.style.background = 'var(--s-glass-hover)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--s-border)';
+                      e.currentTarget.style.background = 'var(--s-glass-bg)';
+                    }}
                   >
-                    <svg className="w-5 h-5 text-white/70 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                    <svg className="w-5 h-5 transition-colors" style={{ color: 'var(--s-text-muted)' }} viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 21.99 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.1 21.99C7.79 22.03 6.8 20.68 5.96 19.47C4.25 16.56 2.93 11.3 4.7 7.72C5.57 5.94 7.36 4.86 9.28 4.84C10.56 4.82 11.78 5.71 12.56 5.71C13.34 5.71 14.82 4.62 16.37 4.8C17.03 4.83 18.85 5.07 20 6.85C19.88 6.93 17.48 8.27 17.51 11.24C17.54 14.75 20.48 15.87 20.52 15.89C20.49 15.97 20.05 17.49 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z"/>
                     </svg>
                     <div>
-                      <div className="text-[9px] text-white/40 leading-none">Baixar na</div>
-                      <div className="text-[13px] text-white/80 font-semibold leading-tight group-hover:text-white transition-colors">App Store</div>
+                      <div className="text-[9px] leading-none" style={{ color: 'var(--s-text-muted)' }}>Baixar na</div>
+                      <div className="text-[13px] font-semibold leading-tight transition-colors" style={{ color: 'var(--s-text-80)' }}>App Store</div>
                     </div>
                   </a>
                   <a
                     href={col.stores.google}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg border border-white/10 hover:border-white/25 bg-white/[0.03] hover:bg-white/[0.06] transition-all group w-fit"
+                    className="inline-flex items-center gap-2 px-3 py-2 rounded-lg transition-all group w-fit"
+                    style={{
+                      border: '1px solid var(--s-border)',
+                      background: 'var(--s-glass-bg)',
+                    }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'var(--s-text-muted)';
+                      e.currentTarget.style.background = 'var(--s-glass-hover)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'var(--s-border)';
+                      e.currentTarget.style.background = 'var(--s-glass-bg)';
+                    }}
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path d="M3 20.5V3.5C3 2.91 3.34 2.39 3.84 2.15L13.69 12L3.84 21.85C3.34 21.61 3 21.09 3 20.5Z" fill="#4285F4"/>
@@ -175,8 +228,8 @@ export default function Footer() {
                       <path d="M6.05 2.66L16.81 8.88L13.69 12L6.05 2.66Z" fill="#34A853"/>
                     </svg>
                     <div>
-                      <div className="text-[9px] text-white/40 leading-none">Disponível no</div>
-                      <div className="text-[13px] text-white/80 font-semibold leading-tight group-hover:text-white transition-colors">Google Play</div>
+                      <div className="text-[9px] leading-none" style={{ color: 'var(--s-text-muted)' }}>Disponível no</div>
+                      <div className="text-[13px] font-semibold leading-tight transition-colors" style={{ color: 'var(--s-text-80)' }}>Google Play</div>
                     </div>
                   </a>
                 </div>
@@ -184,7 +237,7 @@ export default function Footer() {
             ))}
           </div>
 
-          {/* ─── Company column ─── */}
+          {/* Company column */}
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -192,13 +245,16 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.16 }}
             className="lg:col-span-3"
           >
-            <h3 className="text-white font-semibold text-sm mb-5">Empresa</h3>
+            <h3 className="font-semibold text-sm mb-5" style={{ color: 'var(--s-text)' }}>Empresa</h3>
             <ul className="space-y-2.5 mb-8">
               {companyLinks.map((link, li) => (
                 <li key={li}>
                   <Link
                     href={link.href}
-                    className="text-white/35 hover:text-white text-[13px] transition-colors"
+                    className="text-[13px] transition-colors"
+                    style={{ color: 'var(--s-text-muted)' }}
+                    onMouseEnter={e => e.currentTarget.style.color = 'var(--s-text)'}
+                    onMouseLeave={e => e.currentTarget.style.color = 'var(--s-text-muted)'}
                   >
                     {link.name}
                   </Link>
@@ -206,7 +262,7 @@ export default function Footer() {
               ))}
             </ul>
 
-            <div className="text-[11px] text-white/20 leading-relaxed">
+            <div className="text-[11px] leading-relaxed" style={{ color: 'var(--s-text-faint)' }}>
               CNPJ: 56.390.849-0001/73
               <br />
               Meca Serviços e Benefícios Ltda.
@@ -214,14 +270,22 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        {/* ─── Divider ─── */}
-        <div className="h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+        {/* Divider */}
+        <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, var(--s-border-light), transparent)` }} />
 
-        {/* ─── Bottom bar ─── */}
+        {/* Bottom bar */}
         <div className="py-5 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <div className="flex flex-wrap gap-5 text-[11px] text-white/25">
+          <div className="flex flex-wrap gap-5 text-[11px]" style={{ color: 'var(--s-text-faint)' }}>
             {['Política de Privacidade', 'Termos de Uso', 'Cookies'].map((l) => (
-              <Link key={l} href="#" className="hover:text-white/50 transition-colors">{l}</Link>
+              <Link
+                key={l}
+                href="#"
+                className="transition-colors"
+                onMouseEnter={e => e.currentTarget.style.color = 'var(--s-text-secondary)'}
+                onMouseLeave={e => e.currentTarget.style.color = 'var(--s-text-faint)'}
+              >
+                {l}
+              </Link>
             ))}
           </div>
 
@@ -236,9 +300,10 @@ export default function Footer() {
                 src="https://baas.asaas.com/selos/Servicos_financeiros_Asaas-Reduzida-Negativo-Branco.svg?id=2a6ee772-f63f-424d-9d0e-1a3811b0f64c"
                 alt="Serviços financeiros por Asaas"
                 className="h-5"
+                style={{ filter: isDark ? 'none' : 'invert(1)' }}
               />
             </a>
-            <span className="text-[11px] text-white/15">© {year} MECA. Todos os direitos reservados.</span>
+            <span className="text-[11px]" style={{ color: 'var(--s-text-ghost)' }}>© {year} MECA. Todos os direitos reservados.</span>
           </div>
         </div>
       </div>

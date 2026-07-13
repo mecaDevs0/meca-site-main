@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { BarChart3, Bell, DollarSign, MessageSquare, Star, TrendingUp, Users, Wrench } from 'lucide-react';
-import Image from 'next/image';
 
 const features = [
   {
@@ -46,7 +45,7 @@ const stats = [
 
 export default function AppOficinaSection() {
   return (
-    <section id="oficinas" className="py-32 relative overflow-hidden" style={{ background: '#0a0c14' }}>
+    <section id="oficinas" className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg-alt)' }}>
 
       {/* Background */}
       <div className="absolute inset-0 pointer-events-none">
@@ -55,7 +54,7 @@ export default function AppOficinaSection() {
       </div>
 
       {/* Diagonal separator top */}
-      <div className="absolute top-0 left-0 right-0 h-24 bg-[#080808]" style={{ clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 100%)' }} />
+      <div className="absolute top-0 left-0 right-0 h-24" style={{ background: 'var(--s-bg)', clipPath: 'polygon(0 0, 100% 0, 100% 0, 0 100%)' }} />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -71,19 +70,19 @@ export default function AppOficinaSection() {
             style={{
               background: 'rgba(37,41,64,0.4)',
               border: '1px solid rgba(37,41,64,0.8)',
-              color: '#8b9cf4',
+              color: 'var(--s-oficina-accent-text)',
             }}
           >
             <Wrench className="w-4 h-4" />
             Para Oficinas
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             App{' '}
             <span style={{ background: 'linear-gradient(135deg, #4a6cf7, #8b9cf4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text' }}>
               Oficina MECA
             </span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             A ferramenta que sua oficina precisa para crescer. Gerencie tudo,
             atraia mais clientes e construa uma reputação sólida.
           </p>
@@ -103,9 +102,10 @@ export default function AppOficinaSection() {
                 whileHover={{ y: -4, scale: 1.01 }}
                 className="rounded-2xl p-6 transition-all duration-300 group cursor-default"
                 style={{
-                  background: 'rgba(255,255,255,0.03)',
+                  background: 'var(--s-glass-bg)',
                   border: '1px solid rgba(74,108,247,0.15)',
                   backdropFilter: 'blur(12px)',
+                  boxShadow: 'var(--s-card-shadow)',
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.borderColor = 'rgba(74,108,247,0.35)';
@@ -118,10 +118,10 @@ export default function AppOficinaSection() {
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                   style={{ background: 'rgba(74,108,247,0.15)' }}
                 >
-                  <Icon className="w-6 h-6" style={{ color: '#8b9cf4' }} />
+                  <Icon className="w-6 h-6" style={{ color: 'var(--s-oficina-accent-text)' }} />
                 </div>
-                <h3 className="text-white font-semibold mb-2">{f.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+                <h3 className="font-semibold mb-2" style={{ color: 'var(--s-text)' }}>{f.title}</h3>
+                <p className="text-sm leading-relaxed" style={{ color: 'var(--s-text-secondary)' }}>{f.desc}</p>
               </motion.div>
             );
           })}
@@ -161,18 +161,14 @@ export default function AppOficinaSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="rounded-3xl p-8 lg:p-12 border"
-          style={{
-            background: 'rgba(255,255,255,0.02)',
-            border: '1px solid rgba(255,255,255,0.06)',
-          }}
+          className="glass rounded-3xl p-8 lg:p-12"
         >
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
             <div className="text-center lg:text-left">
-              <h3 className="text-2xl lg:text-3xl font-bold text-white mb-3">
+              <h3 className="text-2xl lg:text-3xl font-bold mb-3" style={{ color: 'var(--s-text)' }}>
                 Leve sua oficina para o próximo nível
               </h3>
-              <p className="text-white/50 mb-6">
+              <p className="mb-6" style={{ color: 'var(--s-text-secondary)' }}>
                 Cadastre sua oficina agora. Disponível para iOS e Android.
               </p>
               <div className="flex flex-row gap-4 justify-center lg:justify-start">
@@ -201,23 +197,23 @@ export default function AppOficinaSection() {
 
             {/* Right — Ratings */}
             <div className="flex gap-8">
-              <div className="text-center rounded-2xl px-6 py-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div className="text-3xl font-bold text-white mb-1">4.8</div>
+              <div className="text-center rounded-2xl px-6 py-4" style={{ background: 'var(--s-glass-bg)', border: '1px solid var(--s-border-light)', boxShadow: 'var(--s-card-shadow)' }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: 'var(--s-text)' }}>4.8</div>
                 <div className="flex justify-center gap-0.5 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <div className="text-white/40 text-xs">App Store</div>
+                <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>App Store</div>
               </div>
-              <div className="text-center rounded-2xl px-6 py-4" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                <div className="text-3xl font-bold text-white mb-1">4.9</div>
+              <div className="text-center rounded-2xl px-6 py-4" style={{ background: 'var(--s-glass-bg)', border: '1px solid var(--s-border-light)', boxShadow: 'var(--s-card-shadow)' }}>
+                <div className="text-3xl font-bold mb-1" style={{ color: 'var(--s-text)' }}>4.9</div>
                 <div className="flex justify-center gap-0.5 mb-1">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-4 h-4 text-yellow-400 fill-yellow-400" />
                   ))}
                 </div>
-                <div className="text-white/40 text-xs">Google Play</div>
+                <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Google Play</div>
               </div>
             </div>
           </div>

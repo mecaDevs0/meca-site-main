@@ -33,9 +33,10 @@ function ChatBubble({ msg, visible }) {
           <div
             className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed ${
               isUser
-                ? 'bg-meca-verde/20 text-white border border-meca-verde/30 rounded-br-sm'
-                : 'bg-meca-ai/15 text-white border border-meca-ai/25 rounded-bl-sm'
+                ? 'bg-meca-verde/20 border border-meca-verde/30 rounded-br-sm'
+                : 'bg-meca-ai/15 border border-meca-ai/25 rounded-bl-sm'
             }`}
+            style={{ color: 'var(--s-text)' }}
           >
             {msg.text}
           </div>
@@ -55,7 +56,6 @@ function AnimatedChat() {
     return () => clearTimeout(timer);
   }, [visibleCount]);
 
-  // Restart animation
   useEffect(() => {
     if (visibleCount >= chatMessages.length) {
       const reset = setTimeout(() => setVisibleCount(0), 3500);
@@ -97,7 +97,7 @@ const features = [
 
 export default function MIASection() {
   return (
-    <section id="mia" className="py-32 bg-[#080808] relative overflow-hidden">
+    <section id="mia" className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-meca-ai/6 blur-[120px]" />
@@ -118,11 +118,11 @@ export default function MIASection() {
             <Sparkles className="w-4 h-4" />
             Exclusivo no App Cliente
           </div>
-          <h2 className="text-4xl lg:text-6xl font-bold text-white mb-6">
+          <h2 className="text-4xl lg:text-6xl font-bold mb-6" style={{ color: 'var(--s-text)' }}>
             Conheça a{' '}
             <span className="gradient-text-ai">MIA</span>
           </h2>
-          <p className="text-xl text-white/50 max-w-2xl mx-auto">
+          <p className="text-xl max-w-2xl mx-auto" style={{ color: 'var(--s-text-secondary)' }}>
             A inteligência artificial do MECA que diagnostica problemas, recomenda serviços
             e agenda tudo para você — em segundos.
           </p>
@@ -149,14 +149,15 @@ export default function MIASection() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: i * 0.12 }}
                   whileHover={{ x: 4 }}
-                  className="flex items-start gap-4 p-5 rounded-2xl glass border border-white/[0.06] hover:border-meca-ai/30 transition-all duration-300 group"
+                  className="flex items-start gap-4 p-5 rounded-2xl glass hover:border-meca-ai/30 transition-all duration-300 group"
+                  style={{ borderColor: 'var(--s-border-light)' }}
                 >
                   <div className="w-12 h-12 rounded-xl bg-meca-ai/15 flex items-center justify-center flex-shrink-0 group-hover:bg-meca-ai/25 transition-colors">
                     <Icon className="w-6 h-6 text-meca-ai" />
                   </div>
                   <div>
-                    <h3 className="text-white font-semibold mb-1">{f.title}</h3>
-                    <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+                    <h3 className="font-semibold mb-1" style={{ color: 'var(--s-text)' }}>{f.title}</h3>
+                    <p className="text-sm leading-relaxed" style={{ color: 'var(--s-text-secondary)' }}>{f.desc}</p>
                   </div>
                 </motion.div>
               );
@@ -177,22 +178,22 @@ export default function MIASection() {
             {/* Chat card */}
             <div className="relative glass-ai rounded-3xl p-6 border border-meca-ai/20 shadow-2xl">
               {/* Chat header */}
-              <div className="flex items-center gap-3 pb-5 mb-5 border-b border-white/[0.08]">
+              <div className="flex items-center gap-3 pb-5 mb-5" style={{ borderBottom: '1px solid var(--s-border)' }}>
                 <div className="w-10 h-10 rounded-full bg-gradient-to-br from-meca-ai-dark to-meca-ai flex items-center justify-center shadow-lg">
                   <Bot className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <div className="text-white font-semibold text-sm flex items-center gap-2">
+                  <div className="font-semibold text-sm flex items-center gap-2" style={{ color: 'var(--s-text)' }}>
                     MIA
                     <span className="text-xs font-normal px-2 py-0.5 rounded-full bg-meca-ai/20 text-meca-ai">IA do MECA</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <div className="w-2 h-2 rounded-full bg-meca-verde animate-pulse" />
-                    <span className="text-white/40 text-xs">Online agora</span>
+                    <span className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Online agora</span>
                   </div>
                 </div>
                 <div className="ml-auto">
-                  <MessageSquare className="w-5 h-5 text-white/20" />
+                  <MessageSquare className="w-5 h-5" style={{ color: 'var(--s-text-faint)' }} />
                 </div>
               </div>
 
@@ -200,9 +201,9 @@ export default function MIASection() {
               <AnimatedChat />
 
               {/* Input bar */}
-              <div className="mt-5 pt-4 border-t border-white/[0.08]">
-                <div className="flex items-center gap-3 bg-white/5 rounded-xl px-4 py-3 border border-white/[0.08]">
-                  <span className="text-white/30 text-sm flex-1">Descreva o problema do seu carro...</span>
+              <div className="mt-5 pt-4" style={{ borderTop: '1px solid var(--s-border)' }}>
+                <div className="flex items-center gap-3 rounded-xl px-4 py-3" style={{ background: 'var(--s-glass-hover)', border: '1px solid var(--s-border)' }}>
+                  <span className="text-sm flex-1" style={{ color: 'var(--s-text-faint)' }}>Descreva o problema do seu carro...</span>
                   <div className="w-8 h-8 rounded-lg bg-meca-ai/80 flex items-center justify-center">
                     <Sparkles className="w-4 h-4 text-white" />
                   </div>
@@ -216,7 +217,7 @@ export default function MIASection() {
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               className="absolute -top-5 -right-5 glass-ai rounded-2xl px-4 py-2 border border-meca-ai/30 shadow-lg"
             >
-              <div className="text-white text-xs font-medium flex items-center gap-2">
+              <div className="text-xs font-medium flex items-center gap-2" style={{ color: 'var(--s-text)' }}>
                 <Brain className="w-3 h-3 text-meca-ai" />
                 IA Automotiva
               </div>
