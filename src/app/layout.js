@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
         }} />
         <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17215013580" />
         <script dangerouslySetInnerHTML={{
-          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17215013580');`
+          __html: `window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','AW-17215013580');gtag('event','conversion',{'send_to':'AW-17215013580/NccNCNH9o_UaEMyF4ZBA'});`
         }} />
         <script dangerouslySetInnerHTML={{
           __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
