@@ -8,7 +8,16 @@ const ubuntu = Ubuntu({
 
 export const metadata = {
   title: 'MECA - Oficinas de confiança na palma da mão',
-  description: 'Quem vai de MECA, vai além!',
+  description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/icon.png', sizes: '64x64', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
 }
 
 export default function RootLayout({ children }) {
