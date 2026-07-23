@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, X } from 'lucide-react';
-import { getStoreUrl } from '@/lib/platform';
 
 export default function StickyDownloadBanner() {
   const [visible, setVisible] = useState(false);
@@ -62,9 +61,7 @@ export default function StickyDownloadBanner() {
               </p>
             </div>
             <a
-              href={getStoreUrl('sticky-banner')}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/app"
               className="flex-shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-bold text-white"
               style={{
                 background: 'linear-gradient(135deg, #41b173, #2d8f5a)',

@@ -124,12 +124,10 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="flex flex-col items-center gap-5 mb-10"
         >
-          {/* Big download button — mobile: links to correct store, desktop: scrolls to store buttons */}
+          {/* Mobile: single button → /app (deep link smart redirect) */}
           {platform !== 'desktop' ? (
             <motion.a
-              href={getStoreUrl('hero')}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/app"
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.96 }}
               className="relative px-10 py-5 rounded-2xl text-white font-bold text-lg overflow-hidden group w-full sm:w-auto"
@@ -145,47 +143,32 @@ export default function HeroSection() {
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.a>
           ) : (
-            <motion.button
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.96 }}
-              onClick={() => scrollToSection('hero-stores')}
-              className="relative px-10 py-5 rounded-2xl text-white font-bold text-lg overflow-hidden group"
-              style={{
-                background: 'linear-gradient(135deg, #41b173, #2d8f5a)',
-                boxShadow: '0 0 40px rgba(65,177,115,0.4)',
-              }}
-            >
-              <span className="relative z-10 flex items-center gap-3">
-                <Download className="w-6 h-6" />
-                Baixar App Grátis
-              </span>
-              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-            </motion.button>
+            <>
+              {/* Desktop: show both store buttons */}
+              <div id="hero-stores" className="flex flex-row gap-4 justify-center">
+                <motion.a
+                  href={urls.ios}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[170px] h-[56px] relative drop-shadow-2xl"
+                >
+                  <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
+                </motion.a>
+                <motion.a
+                  href={urls.android}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ scale: 1.06 }}
+                  whileTap={{ scale: 0.94 }}
+                  className="w-[170px] h-[56px] relative drop-shadow-2xl"
+                >
+                  <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
+                </motion.a>
+              </div>
+            </>
           )}
-
-          {/* Store buttons — always visible */}
-          <div id="hero-stores" className="flex flex-row gap-4 justify-center">
-            <motion.a
-              href={urls.ios}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              className="w-[150px] h-[50px] relative drop-shadow-2xl"
-            >
-              <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
-            </motion.a>
-            <motion.a
-              href={urls.android}
-              target="_blank"
-              rel="noopener noreferrer"
-              whileHover={{ scale: 1.06 }}
-              whileTap={{ scale: 0.94 }}
-              className="w-[150px] h-[50px] relative drop-shadow-2xl"
-            >
-              <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
-            </motion.a>
-          </div>
 
           {/* Secondary CTA — oficinas */}
           <motion.button

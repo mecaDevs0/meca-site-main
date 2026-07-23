@@ -8,8 +8,8 @@ const ubuntu = Ubuntu({
 
 export const metadata = {
   metadataBase: new URL('https://www.mecabr.com'),
-  title: 'MECA - O conserto do seu carro na palma da mão',
-  description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+  title: 'Meca: Agendamento de serviços automotivos',
+  description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },
@@ -22,8 +22,8 @@ export const metadata = {
   },
   manifest: '/manifest.json',
   openGraph: {
-    title: 'MECA - O conserto do seu carro na palma da mão',
-    description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+    title: 'Meca: Agendamento de serviços automotivos',
+    description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
     url: 'https://www.mecabr.com',
     siteName: 'MECA',
     images: [
@@ -39,8 +39,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary',
-    title: 'MECA - O conserto do seu carro na palma da mão',
-    description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+    title: 'Meca: Agendamento de serviços automotivos',
+    description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
     images: ['/logo-512.png'],
   },
 }
@@ -62,7 +62,7 @@ export default function RootLayout({ children }) {
                 'https://www.instagram.com/mecabr',
                 'https://www.linkedin.com/company/mecabr',
               ],
-              description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+              description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
             }),
           }}
         />

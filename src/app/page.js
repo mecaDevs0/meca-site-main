@@ -12,12 +12,12 @@ import StickyDownloadBanner from '@/components/StickyDownloadBanner';
 import TestimonialsSection from '@/components/TestimonialsSection';
 
 export const metadata = {
-  title: 'MECA - Seu carro precisa de manutenção? Resolva pelo app.',
-  description: 'Encontre oficinas verificadas, agende o serviço e pague com segurança pelo app MECA. Disponível para iOS e Android. Gratuito.',
-  keywords: 'oficina, mecânico, carro, manutenção, app, aplicativo, orçamento, agendamento, MIA, inteligência artificial',
+  title: 'Meca: Agendamento de serviços automotivos',
+  description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
+  keywords: 'oficina, mecânico, carro, manutenção, app, aplicativo, orçamento, agendamento, serviços automotivos',
   openGraph: {
-    title: 'MECA - Seu carro precisa de manutenção? Resolva pelo app.',
-    description: 'Encontre oficinas verificadas, agende o serviço e pague com segurança pelo app MECA.',
+    title: 'Meca: Agendamento de serviços automotivos',
+    description: 'Uma forma fácil e rápida de encontrar a oficina certa para cuidar do seu veículo. Agende seu serviço com base em proximidade, avaliações e muito mais.',
     type: 'website',
   },
 };
