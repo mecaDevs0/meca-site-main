@@ -1,9 +1,19 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, Sparkles } from 'lucide-react';
+import { ArrowDown, Download, Star, Wrench } from 'lucide-react';
+import { getPlatform, getStoreUrl, getClienteStoreUrls } from '@/lib/platform';
 
 export default function HeroSection() {
+  const [platform, setPlatform] = useState('desktop');
+
+  useEffect(() => {
+    setPlatform(getPlatform());
+  }, []);
+
+  const urls = getClienteStoreUrls('hero');
+
   const scrollToSection = (sectionId) => {
     const el = document.getElementById(sectionId);
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -14,8 +24,8 @@ export default function HeroSection() {
       {/* Background radial gradients */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full bg-meca-verde/5 blur-[120px]" />
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-meca-ai/8 blur-[100px]" />
-        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-meca-verde/6 blur-[90px]" />
+        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] rounded-full bg-meca-verde/8 blur-[100px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] rounded-full bg-meca-ai/6 blur-[90px]" />
       </div>
 
       {/* Grid pattern overlay */}
@@ -31,13 +41,11 @@ export default function HeroSection() {
       {/* Floating particles */}
       {[
         { w: 3, h: 4, top: 20, left: 15, color: '#41b173' },
-        { w: 4, h: 3, top: 35, left: 75, color: '#A855F7' },
+        { w: 4, h: 3, top: 35, left: 75, color: '#41b173' },
         { w: 2, h: 5, top: 60, left: 30, color: '#41b173' },
         { w: 5, h: 3, top: 75, left: 60, color: '#A855F7' },
         { w: 3, h: 3, top: 45, left: 85, color: '#41b173' },
-        { w: 4, h: 4, top: 15, left: 55, color: '#A855F7' },
-        { w: 2, h: 4, top: 80, left: 20, color: '#41b173' },
-        { w: 5, h: 2, top: 55, left: 45, color: '#A855F7' },
+        { w: 4, h: 4, top: 15, left: 55, color: '#41b173' },
       ].map((p, i) => (
         <motion.div
           key={i}
@@ -64,33 +72,38 @@ export default function HeroSection() {
       ))}
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-32 lg:pt-40">
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-28 lg:pt-36">
 
-        {/* Badge */}
+        {/* Trust badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass border border-meca-ai/30 text-meca-ai text-sm font-medium"
+          className="inline-flex items-center gap-2 px-4 py-2 mb-8 rounded-full glass-verde text-sm font-medium"
+          style={{ color: 'var(--s-verde-text)' }}
         >
-          <Sparkles className="w-4 h-4" />
-          Apresentando a MIA — IA do MECA
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-3.5 h-3.5 text-yellow-400 fill-yellow-400" />
+            ))}
+          </div>
+          4.8 na App Store · Gratuito
         </motion.div>
 
-        {/* Headline */}
+        {/* Headline — pain-point focused */}
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl lg:text-8xl font-bold leading-[1.05] mb-6"
+          className="text-4xl sm:text-5xl lg:text-7xl font-bold leading-[1.1] mb-6"
           style={{ color: 'var(--s-text)' }}
         >
-          O Futuro da{' '}
-          <span className="gradient-text-verde">Manutenção</span>
+          Seu carro precisa de{' '}
+          <span className="gradient-text-verde">manutenção?</span>
           <br />
-          Automotiva
-          <br />
-          <span className="gradient-text-ai">está Aqui.</span>
+          <span className="text-3xl sm:text-4xl lg:text-5xl font-semibold" style={{ color: 'var(--s-text-secondary)' }}>
+            Resolva em minutos pelo app.
+          </span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -98,118 +111,127 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-lg sm:text-xl max-w-2xl mx-auto mb-12 leading-relaxed"
-          style={{ color: 'var(--s-text-secondary)' }}
+          className="text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
+          style={{ color: 'var(--s-text-muted)' }}
         >
-          Conectamos motoristas às melhores oficinas com tecnologia de ponta.
-          Um app para motoristas. Um app para oficinas. Uma plataforma que transforma o mercado automotivo.
+          Encontre oficinas verificadas, agende o serviço e pague com segurança — tudo pelo app MECA.
         </motion.p>
 
-        {/* CTAs */}
+        {/* Primary CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+          className="flex flex-col items-center gap-5 mb-10"
         >
-          {/* MIA CTA */}
-          <motion.button
-            whileHover={{ scale: 1.04 }}
-            whileTap={{ scale: 0.96 }}
-            onClick={() => scrollToSection('motoristas')}
-            className="relative px-8 py-4 rounded-2xl text-white font-semibold text-base overflow-hidden group"
-            style={{
-              background: 'linear-gradient(135deg, #7C3AED, #A855F7)',
-              boxShadow: '0 0 40px rgba(168,85,247,0.4)',
-            }}
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <Sparkles className="w-5 h-5" />
-              Falar com a MIA
-            </span>
-            <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-          </motion.button>
+          {/* Big download button — mobile: links to correct store, desktop: scrolls to store buttons */}
+          {platform !== 'desktop' ? (
+            <motion.a
+              href={getStoreUrl('hero')}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              className="relative px-10 py-5 rounded-2xl text-white font-bold text-lg overflow-hidden group w-full sm:w-auto"
+              style={{
+                background: 'linear-gradient(135deg, #41b173, #2d8f5a)',
+                boxShadow: '0 0 40px rgba(65,177,115,0.4)',
+              }}
+            >
+              <span className="relative z-10 flex items-center justify-center gap-3">
+                <Download className="w-6 h-6" />
+                Baixar App Grátis
+              </span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.a>
+          ) : (
+            <motion.button
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
+              onClick={() => scrollToSection('hero-stores')}
+              className="relative px-10 py-5 rounded-2xl text-white font-bold text-lg overflow-hidden group"
+              style={{
+                background: 'linear-gradient(135deg, #41b173, #2d8f5a)',
+                boxShadow: '0 0 40px rgba(65,177,115,0.4)',
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-3">
+                <Download className="w-6 h-6" />
+                Baixar App Grátis
+              </span>
+              <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.button>
+          )}
 
-          {/* Secondary CTA */}
+          {/* Store buttons — always visible */}
+          <div id="hero-stores" className="flex flex-row gap-4 justify-center">
+            <motion.a
+              href={urls.ios}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              className="w-[150px] h-[50px] relative drop-shadow-2xl"
+            >
+              <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
+            </motion.a>
+            <motion.a
+              href={urls.android}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.06 }}
+              whileTap={{ scale: 0.94 }}
+              className="w-[150px] h-[50px] relative drop-shadow-2xl"
+            >
+              <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
+            </motion.a>
+          </div>
+
+          {/* Secondary CTA — oficinas */}
           <motion.button
             whileHover={{ scale: 1.04 }}
             whileTap={{ scale: 0.96 }}
-            onClick={() => scrollToSection('motoristas')}
-            className="px-8 py-4 rounded-2xl font-semibold text-base transition-all duration-300"
+            onClick={() => scrollToSection('oficinas')}
+            className="px-6 py-2.5 rounded-xl font-medium text-sm transition-all duration-300"
             style={{
-              color: 'var(--s-text)',
+              color: 'var(--s-text-muted)',
               border: '1px solid var(--s-border)',
             }}
             onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'rgba(65,177,115,0.5)';
-              e.currentTarget.style.background = 'rgba(65,177,115,0.08)';
+              e.currentTarget.style.borderColor = 'rgba(74,108,247,0.4)';
+              e.currentTarget.style.background = 'rgba(74,108,247,0.06)';
+              e.currentTarget.style.color = 'var(--s-oficina-accent-text)';
             }}
             onMouseLeave={e => {
               e.currentTarget.style.borderColor = 'var(--s-border)';
               e.currentTarget.style.background = 'transparent';
+              e.currentTarget.style.color = 'var(--s-text-muted)';
             }}
           >
-            Conhecer os Apps
+            <span className="flex items-center gap-2">
+              <Wrench className="w-4 h-4" />
+              Sou oficina
+            </span>
           </motion.button>
         </motion.div>
 
-        {/* Two-sided value props */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
-        >
-          <div className="glass rounded-2xl px-6 py-4 flex items-center gap-4 border border-meca-verde/20">
-            <div className="w-10 h-10 rounded-xl bg-meca-verde/15 flex items-center justify-center">
-              <span className="text-xl">🚗</span>
-            </div>
-            <div className="text-left">
-              <div className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>Para Motoristas</div>
-              <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Agende, pague e acompanhe</div>
-            </div>
-          </div>
-
-          <div className="text-2xl font-thin hidden sm:block" style={{ color: 'var(--s-text-faint)' }}>+</div>
-
-          <div className="glass rounded-2xl px-6 py-4 flex items-center gap-4 border border-meca-marinho/40">
-            <div className="w-10 h-10 rounded-xl bg-meca-marinho/40 flex items-center justify-center">
-              <span className="text-xl">🔧</span>
-            </div>
-            <div className="text-left">
-              <div className="font-semibold text-sm" style={{ color: 'var(--s-text)' }}>Para Oficinas</div>
-              <div className="text-xs" style={{ color: 'var(--s-text-muted)' }}>Gerencie e cresça seu negócio</div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* App store buttons */}
+        {/* Social proof strip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="flex flex-row gap-4 justify-center"
+          className="flex flex-wrap gap-6 justify-center items-center mb-16"
         >
-          <motion.a
-            href="https://apps.apple.com/us/app/meca/id6743087361"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.94 }}
-            className="w-[150px] h-[50px] relative drop-shadow-2xl"
-          >
-            <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
-          </motion.a>
-          <motion.a
-            href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.06 }}
-            whileTap={{ scale: 0.94 }}
-            className="w-[150px] h-[50px] relative drop-shadow-2xl"
-          >
-            <img src="/buttonGooglePlay.svg" alt="Google Play" className="h-full w-full object-contain" />
-          </motion.a>
+          {[
+            { label: 'Oficinas Verificadas', value: '500+' },
+            { label: 'Agendamentos', value: '2.000+' },
+            { label: 'Nota App Store', value: '4.8 ★' },
+          ].map((stat, i) => (
+            <div key={i} className="flex items-center gap-2">
+              <span className="text-lg font-bold" style={{ color: 'var(--s-verde-text)' }}>{stat.value}</span>
+              <span className="text-xs" style={{ color: 'var(--s-text-muted)' }}>{stat.label}</span>
+            </div>
+          ))}
         </motion.div>
       </div>
 
@@ -223,7 +245,7 @@ export default function HeroSection() {
         <motion.button
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          onClick={() => scrollToSection('mia')}
+          onClick={() => scrollToSection('como-funciona')}
           style={{ color: 'var(--s-text-faint)' }}
           className="transition-colors"
           onMouseEnter={e => e.currentTarget.style.color = 'var(--s-text-muted)'}

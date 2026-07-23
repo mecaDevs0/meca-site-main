@@ -3,7 +3,7 @@
 import mecaLogoBranco from '@/assets/meca-logo-branco.png';
 import mecaLogoVerde from '@/assets/meca-logo-verde.png';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, Moon, Sun, X } from 'lucide-react';
+import { Download, Menu, Moon, Sun, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
@@ -59,9 +59,9 @@ export default function Navbar() {
   };
 
   const navLinks = [
+    { name: 'Como Funciona', href: '#como-funciona', sectionId: 'como-funciona' },
     { name: 'App Cliente', href: '#motoristas', sectionId: 'motoristas' },
     { name: 'App Oficina', href: '#oficinas', sectionId: 'oficinas' },
-    { name: 'Como Funciona', href: '#como-funciona', sectionId: 'como-funciona' },
     { name: 'Sobre', href: '#sobre', sectionId: 'sobre' },
   ];
 
@@ -157,16 +157,17 @@ export default function Navbar() {
               </motion.button>
 
               <motion.a
-                href="#motoristas"
-                onClick={(e) => scrollToSection(e, 'motoristas')}
+                href="/app"
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.96 }}
-                className="flex items-center gap-2.5 px-4 py-2 rounded-xl bg-meca-verde/10 border border-meca-verde/30 hover:bg-meca-verde/20 hover:border-meca-verde/50 transition-all duration-200"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-white font-semibold text-sm transition-all duration-200"
+                style={{
+                  background: 'linear-gradient(135deg, #41b173, #2d8f5a)',
+                  boxShadow: '0 2px 12px rgba(65,177,115,0.3)',
+                }}
               >
-                <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
-                  <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
-                </div>
-                <span className="text-sm font-semibold" style={{ color: 'var(--s-verde-text)' }}>App Cliente</span>
+                <Download className="w-4 h-4" />
+                Baixar App
               </motion.a>
               <motion.a
                 href="#oficinas"
@@ -273,15 +274,14 @@ export default function Navbar() {
 
                   <div className="mt-auto pt-8 space-y-3" style={{ borderTop: '1px solid var(--s-border)' }}>
                     <a
-                      href="#motoristas"
-                      onClick={(e) => scrollToSection(e, 'motoristas')}
-                      className="flex items-center gap-3 w-full px-4 py-3 text-sm font-semibold bg-meca-verde/10 border border-meca-verde/30 rounded-xl"
-                      style={{ color: 'var(--s-verde-text)' }}
+                      href="/app"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-3 text-sm font-bold rounded-xl text-white"
+                      style={{
+                        background: 'linear-gradient(135deg, #41b173, #2d8f5a)',
+                      }}
                     >
-                      <div className="w-7 h-7 rounded-lg overflow-hidden flex-shrink-0">
-                        <img src="/app-icon-cliente.png" alt="App Cliente" className="w-full h-full object-cover rounded-md" />
-                      </div>
-                      App Cliente
+                      <Download className="w-4 h-4" />
+                      Baixar App
                     </a>
                     <a
                       href="#oficinas"

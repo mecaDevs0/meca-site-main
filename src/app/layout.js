@@ -7,16 +7,41 @@ const ubuntu = Ubuntu({
 })
 
 export const metadata = {
-  title: 'MECA - Oficinas de confiança na palma da mão',
+  metadataBase: new URL('https://www.mecabr.com'),
+  title: 'MECA - O conserto do seu carro na palma da mão',
   description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },
       { url: '/icon.png', sizes: '64x64', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     apple: [
       { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
     ],
+  },
+  manifest: '/manifest.json',
+  openGraph: {
+    title: 'MECA - O conserto do seu carro na palma da mão',
+    description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+    url: 'https://www.mecabr.com',
+    siteName: 'MECA',
+    images: [
+      {
+        url: '/logo-512.png',
+        width: 512,
+        height: 512,
+        alt: 'MECA Logo',
+      },
+    ],
+    locale: 'pt_BR',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'MECA - O conserto do seu carro na palma da mão',
+    description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+    images: ['/logo-512.png'],
   },
 }
 
@@ -24,6 +49,34 @@ export default function RootLayout({ children }) {
   return (
     <html lang="pt-br" className="dark" suppressHydrationWarning>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'MECA',
+              url: 'https://www.mecabr.com',
+              logo: 'https://www.mecabr.com/logo-512.png',
+              sameAs: [
+                'https://www.instagram.com/mecabr',
+                'https://www.linkedin.com/company/mecabr',
+              ],
+              description: 'Conecte-se com as melhores oficinas da sua região. Agende serviços, compare preços e tenha total controle do seu veículo com o app MECA.',
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              name: 'MECA',
+              url: 'https://www.mecabr.com',
+            }),
+          }}
+        />
         {/* Prevent FOUC: read theme from localStorage before first paint */}
         <script dangerouslySetInnerHTML={{
           __html: `(function(){try{var t=localStorage.getItem('meca-theme');if(t==='light'){document.documentElement.classList.remove('dark')}else if(!t){document.documentElement.classList.add('dark')}}catch(e){}})();`

@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Bot, Calendar, CreditCard, History, MapPin, Shield, Smartphone, Star } from 'lucide-react';
+import { getClienteStoreUrls } from '@/lib/platform';
 
 const features = [
   {
@@ -55,6 +56,8 @@ const features = [
 ];
 
 export default function AppClienteSection() {
+  const urls = getClienteStoreUrls('app-cliente');
+
   return (
     <section id="motoristas" className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
@@ -131,7 +134,7 @@ export default function AppClienteSection() {
               </p>
               <div className="flex flex-row gap-4 justify-center lg:justify-start">
                 <motion.a
-                  href="https://apps.apple.com/us/app/meca/id6743087361"
+                  href={urls.ios}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}
@@ -141,7 +144,7 @@ export default function AppClienteSection() {
                   <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
                 </motion.a>
                 <motion.a
-                  href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
+                  href={urls.android}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}

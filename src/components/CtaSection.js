@@ -2,8 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { Wrench } from 'lucide-react';
+import { getClienteStoreUrls, getOficinaStoreUrls } from '@/lib/platform';
 
 export default function CtaSection() {
+  const clienteUrls = getClienteStoreUrls('cta-final');
+  const oficinaUrls = getOficinaStoreUrls('cta-final');
+
   return (
     <section className="py-32 relative overflow-hidden" style={{ background: 'var(--s-bg)' }}>
 
@@ -82,7 +86,7 @@ export default function CtaSection() {
               {/* Download buttons */}
               <div className="flex flex-row gap-3">
                 <motion.a
-                  href="https://apps.apple.com/us/app/meca/id6743087361"
+                  href={clienteUrls.ios}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}
@@ -92,7 +96,7 @@ export default function CtaSection() {
                   <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
                 </motion.a>
                 <motion.a
-                  href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_cliente&hl=pt_BR&pli=1"
+                  href={clienteUrls.android}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}
@@ -153,7 +157,7 @@ export default function CtaSection() {
               {/* Download buttons */}
               <div className="flex flex-row gap-3">
                 <motion.a
-                  href="https://apps.apple.com/app/meca-oficina/id6476768852"
+                  href={oficinaUrls.ios}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}
@@ -163,7 +167,7 @@ export default function CtaSection() {
                   <img src="/buttonAppleStore.svg" alt="App Store" className="h-full w-full object-contain" />
                 </motion.a>
                 <motion.a
-                  href="https://play.google.com/store/apps/details?id=br.com.megaleios.meca_oficina"
+                  href={oficinaUrls.android}
                   target="_blank"
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.06 }}
