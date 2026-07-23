@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "TEAM_ID_AQUI.br.com.megaleios.meca_cliente",
+        "appID": "7QUDK68223.br.com.megaleios.mecaCliente",
         "paths": ["/app", "/app/*", "/download", "/download/*"]
       }
     ]

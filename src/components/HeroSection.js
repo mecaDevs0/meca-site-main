@@ -206,7 +206,7 @@ export default function HeroSection() {
           className="flex flex-wrap gap-6 justify-center items-center mb-16"
         >
           {[
-            { label: 'Oficinas Verificadas', value: '500+' },
+            { label: 'Oficinas Verificadas', value: '50+' },
             { label: 'Agendamentos', value: '2.000+' },
             { label: 'Nota App Store', value: '4.8 ★' },
           ].map((stat, i) => (
